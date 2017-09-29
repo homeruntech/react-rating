@@ -1,63 +1,65 @@
-var webpack = require('webpack');
-var PACKAGE = require('./package.json');
-var banner = PACKAGE.name + ' - ' + PACKAGE.version + ' | ' +
-  '(c) 2015, ' + new Date().getFullYear() + '  ' + PACKAGE.author + ' | ' +
-  PACKAGE.license + ' | ' +
-  PACKAGE.homepage;
+const { resolve } = require('path');
 
-module.exports = {
-  entry: {
-    'react-rating': './src/react-rating.js'
-  },
+const webpack = require('webpack');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+
+const config = {
+  devtool: 'cheap-module-eval-source-map',
+
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server',
+    './react-rating.js',
+  ],
+
   output: {
-    // Output the bundled file.
-    path: './lib',
-    // Use the name specified in the entry key as name for the bundle file.
-    filename: '[name].js',
-    // Export as a Universal Module Definition library.
-    library: 'ReactRating',
-    libraryTarget: 'umd',
-    // The modified bundle is served from memory at the relative path
-    // specified in publicPath.
-    // I use the same as the output path to use the same index.html either
-    // served by webpack-dev-server or as a static file loaded in the browser.
-    publicPath: '/lib'
+    filename: 'bundle.js',
+    path: resolve(__dirname, 'dist'),
+    publicPath: '',
   },
+
+  context: resolve(__dirname, 'src'),
+
+  devServer: {
+    hot: true,
+    contentBase: resolve(__dirname, 'build'),
+    publicPath: '/'
+  },
+
   module: {
-    loaders: [
+    rules: [
       {
-        // Test for js or jsx files.
-        test: /\.jsx?$/,
+        enforce: "pre",
+        test: /\.js$/,
         exclude: /node_modules/,
-        loaders: [
-          "babel-loader",
-          "eslint-loader"
-        ]
-      }
+        loader: "eslint-loader"
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react', 'stage-2']
+        },
+        exclude: /node_modules/
+      },
     ]
   },
-  externals: {
-    // Don't bundle the 'react' npm package with the component.
-    'react': {
-      root: 'React',
-      commonjs2: 'react',
-      commonjs: 'react',
-      amd: 'react'
-    }
-  },
-  resolve: {
-    // Include empty string '' to resolve files by their explicit extension
-    // (e.g. require('./somefile.ext')).
-    // Include '.js', '.jsx' to resolve files by these implicit extensions
-    // (e.g. require('underscore')).
-    extensions: ['', '.js', '.jsx']
-  },
+
   plugins: [
-    new webpack.DefinePlugin({
-      // If BUILD_DEV is in process environment, return true. Otherwise,
-      // return (void 0). BUILD_DEV=1 before webpack command will do the job.
-      __DEV__: process.env.BUILD_DEV && 'true'
+    new webpack.LoaderOptionsPlugin({
+      test: /\.js$/,
+      options: {
+        eslint: {
+          configFile: resolve(__dirname, '.eslintrc.yml'),
+          cache: false,
+        }
+      },
     }),
-    new webpack.BannerPlugin(banner)
-  ]
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 };
+
+module.exports = config;

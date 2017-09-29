@@ -1,6 +1,6 @@
 {
   "name": "react-rating",
-  "version": "0.9.0",
+  "version": "0.0.1",
   "description": "A rating react component with custom symbols",
   "main": "lib/react-rating.js",
   "files": [
@@ -10,55 +10,62 @@
     "src/"
   ],
   "scripts": {
-    "test": "mocha --compilers js:babel/register --recursive",
-    "lint": "eslint src --ext .js,.jsx",
-    "dev": "webpack-dev-server --progress --colors --host 0.0.0.0 --port 8080",
     "build": "cross-env BUILD_DEV=1 webpack --progress && webpack -p --output-filename react-rating.min.js --progress",
-    "version": "npm run build && git add -A lib",
-    "postversion": "git push && git push --tags",
-    "gh-pages": "./scripts/gh-pages.sh"
+    "eslint:watch": "onchange './src' -iw -- yarn eslint 2> /dev/null",
+    "eslint": "clear && eslint ./src && echo \"No errors found.\"",
+    "start": "webpack-dev-server --progress --colors --host 0.0.0.0 --port 8080",
+    "test:coverage": "yarn test -- --coverage --watch",
+    "test": "react-scripts test --env=jsdom"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dreyescat/react-rating.git"
+    "url": "https://github.com/filipposarzana/react-rating.git"
   },
   "keywords": [
     "rating",
     "react",
     "component",
-    "react-component",
-    "bootstrap",
-    "fontawesome"
+    "react-component"
   ],
-  "author": "dreyescat",
+  "author": "filipposarzana",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dreyescat/react-rating/issues"
+    "url": "https://github.com/filipposarzana/react-rating/issues"
   },
-  "homepage": "https://github.com/dreyescat/react-rating",
+  "homepage": "https://github.com/filipposarzana/react-rating",
   "peerDependencies": {
-    "react": ">=0.13.0"
+    "react": ">=16.0.0"
   },
   "devDependencies": {
-    "babel": "^5.8.20",
-    "babel-core": "^5.7.4",
-    "babel-eslint": "^7.2.2",
-    "babel-loader": "^5.3.2",
-    "bootstrap": "^3.3.5",
-    "chai": "^3.2.0",
-    "create-react-class": "^15.5.1",
-    "cross-env": "^3.2.4",
-    "eslint": "^4.7.2",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-react": "^7.4.0",
-    "font-awesome": "^4.3.0",
-    "mocha": "^2.2.5",
-    "node-libs-browser": "^0.5.2",
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-eslint": "7.2.3",
+    "babel-loader": "7.1.2",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-react-boilerplate": "1.1.1",
+    "babel-preset-react-hmre": "1.1.1",
+    "babel-preset-stage-2": "6.24.1",
+    "enzyme": "2.9.1",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "15.1.0",
+    "eslint-loader": "1.8.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-jsx-a11y": "5.1.0",
+    "eslint-plugin-react": "7.2.0",
+    "jest": "^21.2.1",
+    "onchange": "^3.2.1",
+    "open-browser-webpack-plugin": "^0.0.5",
     "prismjs": "^1.6.0",
     "prop-types": "^15.5.8",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "webpack": "^1.10.1",
-    "webpack-dev-server": "^1.10.1"
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
+  },
+  "dependencies": {
+    "cross-env": "^5.0.5",
+    "react-hot-loader": "next",
+    "react-router-dom": "^4.2.2"
   }
 }

@@ -1,0 +1,29 @@
+parser: babel-eslint
+extends:
+  - airbnb
+rules:
+  jsx-a11y/href-no-hash: 'off'
+  max-len:
+    - error
+    - code: 120
+      ignoreComments: true
+  react/jsx-filename-extension:
+    - error
+    - extensions:
+      - ".js"
+  semi:
+    - error
+    - never
+env:
+  browser: true
+  es6: true
+  jasmine: true
+globals:
+  jest: false
+  "$Keys": false
+settings:
+  import/resolver:
+    node:
+      moduleDirectory:
+        - node_modules
+        - src

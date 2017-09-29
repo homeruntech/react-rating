@@ -1,9 +1,6 @@
-'use strict';
-
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
-import Style from './style';
-import Symbol from './PercentageSymbol';
+import Symbol from './PercentageSymbol'
 
 // Returns the index of the rate in the range (start, stop, step).
 // Returns undefined index if the rate is outside the range.
@@ -12,64 +9,64 @@ import Symbol from './PercentageSymbol';
 const indexOf = (range, rate) => {
   // Check the rate is in the proper range [start..stop] according to
   // the start, stop and step properties in props.
-  const step = range.step;
-  const start = step > 0 ? range.start : range.stop;
-  const stop = step > 0 ? range.stop : range.start;
+  const step = range.step
+  const start = step > 0 ? range.start : range.stop
+  const stop = step > 0 ? range.stop : range.start
   if (step && start <= rate && rate <= stop) {
     // The index corresponds to the number of steps of size props.step
     // that fits between rate and start.
     // This index does not need to be a whole number because we can have
     // fractional symbols, and consequently fractional/float indexes.
-    return (rate - range.start) / step;
+    return (rate - range.start) / step
   }
-};
+}
 
 class Rating extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     const index = props.initialRate !== undefined ?
-      props.initialRate : props.placeholderRate;
+      props.initialRate : props.placeholderRate
     this.state = {
       index: indexOf(props, index),
       indexOver: undefined,
       // Default direction is left to right
       direction: 'ltr'
-    };
-    this.ratingContainer = null;
-    this.handleClick = this.handleClick.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
+    }
+    this.ratingContainer = null
+    this.handleClick = this.handleClick.bind(this)
+    this.handleMouseLeave = this.handleMouseLeave.bind(this)
+    this.handleMouseMove = this.handleMouseMove.bind(this)
   }
 
   componentDidMount() {
     this.setState({
       // detect the computed direction style for the mounted component
       direction: window.getComputedStyle(this.ratingContainer, null).getPropertyValue("direction")
-    });
+    })
   }
 
   componentWillReceiveProps(nextProps) {
     const rate = nextProps.initialRate !== undefined ?
-      nextProps.initialRate : nextProps.placeholderRate;
+      nextProps.initialRate : nextProps.placeholderRate
     this.setState({
       index: indexOf(nextProps, rate),
       selected: nextProps.initialRate !== undefined
-    });
+    })
   }
 
   handleClick(i, event) {
     if (this.props.readonly) {
       return
     }
-    const index = i + this._fractionalIndex(event);
-    this.props.onClick(this._indexToRate(index), event);
+    const index = i + this._fractionalIndex(event)
+    this.props.onClick(this._indexToRate(index), event)
     if (this.state.index !== index) {
-      this.props.onChange(this._indexToRate(index));
+      this.props.onChange(this._indexToRate(index))
       this.setState({
         indexOver: undefined,
         index: index,
         selected: true
-      });
+      })
     }
   }
 
@@ -77,56 +74,56 @@ class Rating extends React.Component {
     if (this.props.readonly) {
       return
     }
-    this.props.onRate();
+    this.props.onRate()
     this.setState({
       indexOver: undefined
-    });
+    })
   }
 
   handleMouseMove(i, event) {
     if (this.props.readonly) {
       return
     }
-    const index = i + this._fractionalIndex(event);
+    const index = i + this._fractionalIndex(event)
     if (this.state.indexOver !== index) {
-      this.props.onRate(this._indexToRate(index));
+      this.props.onRate(this._indexToRate(index))
       this.setState({
         indexOver: index
-      });
+      })
     }
   }
 
   // Calculate the rate of an index according the the start and step.
   _indexToRate(index) {
     return this.props.start + Math.floor(index) * this.props.step +
-      this.props.step * this._roundToFraction(index % 1);
+      this.props.step * this._roundToFraction(index % 1)
   }
 
   // Calculate the corresponding index for a rate according to the provided
   // props or this.props.
   _rateToIndex(rate) {
-    return indexOf(this.props, rate);
+    return indexOf(this.props, rate)
   }
 
   _roundToFraction(index) {
     // Get the closest top fraction.
-    const fraction = Math.ceil(index % 1 * this.props.fractions) / this.props.fractions;
+    const fraction = Math.ceil(index % 1 * this.props.fractions) / this.props.fractions
     // Truncate decimal trying to avoid float precission issues.
-    const precision = Math.pow(10, this.props.scale);
-    const roundedValue = Math.floor(index) + Math.floor(fraction * precision) / precision;
+    const precision = Math.pow(10, this.props.scale)
+    const roundedValue = Math.floor(index) + Math.floor(fraction * precision) / precision
     // Handles bugs when the touchend is past the star stop
-    return roundedValue > this.props.stop ? this.props.stop : roundedValue;
+    return roundedValue > this.props.stop ? this.props.stop : roundedValue
   }
 
   _fractionalIndex(event) {
     const clientX = event.nativeEvent.type.indexOf("touch") > -1 ?
       event.nativeEvent.type.indexOf("touchend") > -1 ?
         event.changedTouches[0].clientX : event.touches[0].clientX
-      : event.clientX;
+      : event.clientX
     const x = this.state.direction === 'rtl' ?
       event.currentTarget.getBoundingClientRect().right - clientX :
-      clientX - event.currentTarget.getBoundingClientRect().left;
-    return this._roundToFraction(x / event.currentTarget.offsetWidth);
+      clientX - event.currentTarget.getBoundingClientRect().left
+    return this._roundToFraction(x / event.currentTarget.offsetWidth)
   }
 
   render() {
@@ -147,31 +144,31 @@ class Rating extends React.Component {
       onClick,
       onRate,
       ...other
-    } = this.props;
-    const symbolNodes = [];
-    const emptySymbols = [].concat(this.props.empty);
-    const placeholderSymbols = [].concat(this.props.placeholder);
-    const fullSymbols = [].concat(this.props.full);
+    } = this.props
+    const symbolNodes = []
+    const emptySymbols = [].concat(this.props.empty)
+    const placeholderSymbols = [].concat(this.props.placeholder)
+    const fullSymbols = [].concat(this.props.full)
     // The symbol with the mouse over prevails over the selected one,
     // provided that we are not in quiet mode.
     const index = !quiet && this.state.indexOver !== undefined ?
-      this.state.indexOver : this.state.index;
+      this.state.indexOver : this.state.index
     // The index of the last full symbol or NaN if index is undefined.
-    const lastFullIndex = Math.floor(index);
+    const lastFullIndex = Math.floor(index)
     // Render the number of whole symbols.
 
     const icon = !this.state.selected &&
       initialRate === undefined &&
       placeholderRate !== undefined &&
       (quiet || this.state.indexOver === undefined) ?
-      placeholderSymbols : fullSymbols;
+      placeholderSymbols : fullSymbols
 
     for (let i = 0; i < Math.floor(this._rateToIndex(stop)); i++) {
       // Return the percentage of the decimal part of the last full index,
       // 100 percent for those below the last full index or 0 percent for those
       // indexes NaN or above the last full index.
       const percent = i - lastFullIndex === 0 ? index % 1 * 100 :
-        i - lastFullIndex < 0 ? 100 : 0;
+        i - lastFullIndex < 0 ? 100 : 0
 
       symbolNodes.push(
         <Symbol
@@ -185,20 +182,20 @@ class Rating extends React.Component {
           onTouchEnd={this.handleClick.bind(this, i)}
           direction={this.state.direction}
         />
-      );
+      )
     }
 
     return (
       <span
         ref={container => {
-          this.ratingContainer = container;
+          this.ratingContainer = container
         }}
         onMouseLeave={this.handleMouseLeave}
         {...other}
       >
         {symbolNodes}
       </span>
-    );
+    )
   }
 }
 
@@ -206,9 +203,9 @@ Rating.defaultProps = {
   start: 0,
   stop: 5,
   step: 1,
-  empty: Style.empty,
-  placeholder: Style.placeholder,
-  full: Style.full,
+  empty: {},
+  placeholder: {},
+  full: {},
   fractions: 1,
   scale: 3,
   onChange: function (rate) {},
@@ -217,7 +214,7 @@ Rating.defaultProps = {
 }
 
 // Define propTypes only in development.
-Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
+Rating.propTypes = {
   start: PropTypes.number,
   stop: PropTypes.number,
   step: PropTypes.number,
@@ -263,6 +260,6 @@ Rating.propTypes = typeof __DEV__ !== 'undefined' && __DEV__ && {
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   onRate: PropTypes.func
-};
+}
 
-module.exports = Rating;
+module.exports = Rating

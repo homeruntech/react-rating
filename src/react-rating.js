@@ -1,1 +1,3 @@
-module.exports = require('./Rating');
+import Rating from './components/Rating'
+
+module.exports = Rating
