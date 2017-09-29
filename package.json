@@ -15,7 +15,8 @@
     "eslint": "clear && eslint ./src && echo \"No errors found.\"",
     "start": "webpack-dev-server --progress --colors --host 0.0.0.0 --port 8080",
     "test:coverage": "yarn test -- --coverage --watch",
-    "test": "react-scripts test --env=jsdom"
+    "test": "react-scripts test --env=jsdom",
+    "storybook": "NODE_PATH=src start-storybook -p 9010"
   },
   "repository": {
     "type": "git",
@@ -53,19 +54,22 @@
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jsx-a11y": "5.1.0",
     "eslint-plugin-react": "7.2.0",
+    "html-webpack-plugin": "^2.30.1",
     "jest": "^21.2.1",
     "onchange": "^3.2.1",
     "open-browser-webpack-plugin": "^0.0.5",
     "prismjs": "^1.6.0",
-    "prop-types": "^15.5.8",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "@storybook/react": "^3.2.11",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
   },
   "dependencies": {
     "cross-env": "^5.0.5",
+    "prop-types": "^15.5.8",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "react-hot-loader": "next",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "styled-components": "^2.2.0"
   }
 }

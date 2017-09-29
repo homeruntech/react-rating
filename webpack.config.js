@@ -1,6 +1,7 @@
 const { resolve } = require('path');
 
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
 const config = {
@@ -59,6 +60,7 @@ const config = {
     new webpack.optimize.ModuleConcatenationPlugin(),
     new OpenBrowserPlugin({ url: 'http://localhost:8080' }),
     new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({ template: './index.html' }),
   ],
 };
 

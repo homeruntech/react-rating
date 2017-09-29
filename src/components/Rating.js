@@ -1,133 +1,146 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Symbol from './PercentageSymbol'
+import styled from 'styled-components'
+// import debounce from 'lodash/debounce'
+import starEmpty from '../assets/star_empty.png'
+import starFull from '../assets/star_full.png'
+import { indexOf, noop } from '../utils'
+import Rate from './Rate'
 
-// Returns the index of the rate in the range (start, stop, step).
-// Returns undefined index if the rate is outside the range.
-// NOTE: A range.step of 0 produces an empty range and consequently returns an
-// undefined index.
-const indexOf = (range, rate) => {
-  // Check the rate is in the proper range [start..stop] according to
-  // the start, stop and step properties in props.
-  const step = range.step
-  const start = step > 0 ? range.start : range.stop
-  const stop = step > 0 ? range.stop : range.start
-  if (step && start <= rate && rate <= stop) {
-    // The index corresponds to the number of steps of size props.step
-    // that fits between rate and start.
-    // This index does not need to be a whole number because we can have
-    // fractional symbols, and consequently fractional/float indexes.
-    return (rate - range.start) / step
-  }
-}
+const Wrapper = styled.div`
+  display: flex;
+  flex: 1 0 auto;
+`
 
-class Rating extends React.Component {
+class Rating extends Component {
   constructor(props) {
     super(props)
-    const index = props.initialRate !== undefined ?
-      props.initialRate : props.placeholderRate
+
+    const { initialRate, placeholderRate } = props
+
     this.state = {
-      index: indexOf(props, index),
-      indexOver: undefined,
-      // Default direction is left to right
-      direction: 'ltr'
+      index: indexOf(props, initialRate || placeholderRate),
     }
-    this.ratingContainer = null
+
     this.handleClick = this.handleClick.bind(this)
+    this.handleGetElement = this.handleGetElement.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
     this.handleMouseMove = this.handleMouseMove.bind(this)
   }
 
-  componentDidMount() {
+  componentWillReceiveProps({ initialRate, placeholderRate, start, stop }) {
     this.setState({
-      // detect the computed direction style for the mounted component
-      direction: window.getComputedStyle(this.ratingContainer, null).getPropertyValue("direction")
+      index: indexOf({ start, stop }, initialRate || placeholderRate),
+      selected: !initialRate,
     })
   }
 
-  componentWillReceiveProps(nextProps) {
-    const rate = nextProps.initialRate !== undefined ?
-      nextProps.initialRate : nextProps.placeholderRate
-    this.setState({
-      index: indexOf(nextProps, rate),
-      selected: nextProps.initialRate !== undefined
-    })
+  handleGetElement(container) {
+    this.ratingContainer = container
   }
 
-  handleClick(i, event) {
-    if (this.props.readonly) {
+  handleClick(event, i) {
+    const { onClick, onChange, readonly } = this.props
+    const { index } = this.state
+
+    if (readonly) {
       return
     }
-    const index = i + this._fractionalIndex(event)
-    this.props.onClick(this._indexToRate(index), event)
-    if (this.state.index !== index) {
-      this.props.onChange(this._indexToRate(index))
+
+    const calculatedIndex = i + this.fractionalIndex(event)
+
+    onClick(this.indexToRate(calculatedIndex), event)
+
+    if (index !== calculatedIndex) {
+      onChange(this.indexToRate(calculatedIndex))
+
       this.setState({
+        index: calculatedIndex,
         indexOver: undefined,
-        index: index,
-        selected: true
+        selected: true,
       })
     }
   }
 
   handleMouseLeave() {
-    if (this.props.readonly) {
+    const { onRate, readonly } = this.props
+
+    if (readonly) {
       return
     }
-    this.props.onRate()
+
+    onRate()
+
     this.setState({
-      indexOver: undefined
+      indexOver: undefined,
     })
   }
 
-  handleMouseMove(i, event) {
-    if (this.props.readonly) {
+  handleMouseMove(event, i) {
+    const { animateOnHover, onRate, readonly } = this.props
+    const { indexOver } = this.state
+
+    if (!animateOnHover || readonly) {
       return
     }
-    const index = i + this._fractionalIndex(event)
-    if (this.state.indexOver !== index) {
-      this.props.onRate(this._indexToRate(index))
+
+    const calculatedIndex = i + this.fractionalIndex(event)
+    console.log(calculatedIndex) // eslint-disable-line no-console
+
+    if (indexOver !== calculatedIndex) {
+      onRate(this.indexToRate(calculatedIndex))
+
       this.setState({
-        indexOver: index
+        indexOver: calculatedIndex,
       })
     }
   }
 
   // Calculate the rate of an index according the the start and step.
-  _indexToRate(index) {
-    return this.props.start + Math.floor(index) * this.props.step +
-      this.props.step * this._roundToFraction(index % 1)
+  indexToRate(index) {
+    const { start, step } = this.props
+
+    return start + (Math.floor(index) * step) + (step * this.roundToFraction(index % 1))
   }
 
   // Calculate the corresponding index for a rate according to the provided
   // props or this.props.
-  _rateToIndex(rate) {
+  rateToIndex(rate) {
     return indexOf(this.props, rate)
   }
 
-  _roundToFraction(index) {
+  roundToFraction(index) {
+    const { fractions, scale, stop } = this.props
     // Get the closest top fraction.
-    const fraction = Math.ceil(index % 1 * this.props.fractions) / this.props.fractions
+    const fraction = Math.ceil((index % 1) * fractions) / fractions
     // Truncate decimal trying to avoid float precission issues.
-    const precision = Math.pow(10, this.props.scale)
-    const roundedValue = Math.floor(index) + Math.floor(fraction * precision) / precision
+    const precision = scale ** 10
+    const roundedValue = Math.floor(index) + (Math.floor(fraction * precision) / precision)
     // Handles bugs when the touchend is past the star stop
-    return roundedValue > this.props.stop ? this.props.stop : roundedValue
+    return roundedValue > stop ? stop : roundedValue
   }
 
-  _fractionalIndex(event) {
-    const clientX = event.nativeEvent.type.indexOf("touch") > -1 ?
-      event.nativeEvent.type.indexOf("touchend") > -1 ?
-        event.changedTouches[0].clientX : event.touches[0].clientX
-      : event.clientX
-    const x = this.state.direction === 'rtl' ?
-      event.currentTarget.getBoundingClientRect().right - clientX :
-      clientX - event.currentTarget.getBoundingClientRect().left
-    return this._roundToFraction(x / event.currentTarget.offsetWidth)
+  fractionalIndex(event) {
+    let clientX
+
+    if (event.nativeEvent.type.indexOf('touch') > -1) {
+      if (event.nativeEvent.type.indexOf('touchend') > -1) {
+        clientX = event.changedTouches[0].clientX
+      } else {
+        clientX = event.touches[0].clientX
+      }
+    } else {
+      clientX = event.clientX
+    }
+
+    const x = clientX - event.currentTarget.getBoundingClientRect().left
+
+    return this.roundToFraction(x / event.currentTarget.offsetWidth)
   }
 
   render() {
     const {
+      animateOnHover,
       start,
       stop,
       step,
@@ -137,7 +150,6 @@ class Rating extends React.Component {
       full,
       placeholder,
       readonly,
-      quiet,
       fractions,
       scale,
       onChange,
@@ -146,55 +158,51 @@ class Rating extends React.Component {
       ...other
     } = this.props
     const symbolNodes = []
-    const emptySymbols = [].concat(this.props.empty)
-    const placeholderSymbols = [].concat(this.props.placeholder)
-    const fullSymbols = [].concat(this.props.full)
     // The symbol with the mouse over prevails over the selected one,
     // provided that we are not in quiet mode.
-    const index = !quiet && this.state.indexOver !== undefined ?
-      this.state.indexOver : this.state.index
+    const index = animateOnHover ? this.state.indexOver || this.state.index : this.state.index
     // The index of the last full symbol or NaN if index is undefined.
     const lastFullIndex = Math.floor(index)
     // Render the number of whole symbols.
 
     const icon = !this.state.selected &&
-      initialRate === undefined &&
-      placeholderRate !== undefined &&
-      (quiet || this.state.indexOver === undefined) ?
-      placeholderSymbols : fullSymbols
+      !initialRate &&
+      placeholderRate &&
+      (!animateOnHover || this.state.indexOver === undefined) ?
+      placeholder : full
 
-    for (let i = 0; i < Math.floor(this._rateToIndex(stop)); i++) {
+    for (let i = 0; i < Math.floor(this.rateToIndex(stop)); i += 1) {
       // Return the percentage of the decimal part of the last full index,
       // 100 percent for those below the last full index or 0 percent for those
       // indexes NaN or above the last full index.
-      const percent = i - lastFullIndex === 0 ? index % 1 * 100 :
-        i - lastFullIndex < 0 ? 100 : 0
+      let percent
+      console.log('i - lastFullIndex', i, lastFullIndex) // eslint-disable-line no-console
+      if (i - lastFullIndex === 0) {
+        percent = (index % 1) * 100
+      } else {
+        percent = i - lastFullIndex < 0 ? 100 : 0
+      }
+
+      console.log('PERCENTAGE', percent) // eslint-disable-line no-console
 
       symbolNodes.push(
-        <Symbol
+        <Rate
           key={i}
-          background={emptySymbols[i % emptySymbols.length]}
-          icon={icon[i % icon.length]}
+          background={empty}
+          icon={icon}
           percent={percent}
-          onClick={this.handleClick.bind(this, i)}
-          onMouseMove={this.handleMouseMove.bind(this, i)}
-          onTouchMove={this.handleMouseMove.bind(this, i)}
-          onTouchEnd={this.handleClick.bind(this, i)}
-          direction={this.state.direction}
-        />
+          onClick={event => this.handleClick(event, i)}
+          onMouseMove={event => this.handleMouseMove(event, i)}
+          onTouchMove={event => this.handleMouseMove(event, i)}
+          onTouchEnd={event => this.handleClick(event, i)}
+        />,
       )
     }
 
     return (
-      <span
-        ref={container => {
-          this.ratingContainer = container
-        }}
-        onMouseLeave={this.handleMouseLeave}
-        {...other}
-      >
+      <Wrapper ref={this.handleGetElement} onMouseLeave={this.handleMouseLeave} {...other}>
         {symbolNodes}
-      </span>
+      </Wrapper>
     )
   }
 }
@@ -203,63 +211,36 @@ Rating.defaultProps = {
   start: 0,
   stop: 5,
   step: 1,
-  empty: {},
-  placeholder: {},
-  full: {},
+  empty: <img alt="" className="empty" src={starEmpty} />,
+  initialRate: 0,
+  placeholderRate: 0,
+  placeholder: <img alt="" className="placeholder" src={starEmpty} />,
+  full: <img alt="" className="full" src={starFull} />,
   fractions: 1,
   scale: 3,
-  onChange: function (rate) {},
-  onClick: function (rate) {},
-  onRate: function (rate) {}
+  animateOnHover: false,
+  readonly: false,
+  onChange: noop,
+  onClick: noop,
+  onRate: noop,
 }
 
-// Define propTypes only in development.
 Rating.propTypes = {
   start: PropTypes.number,
   stop: PropTypes.number,
   step: PropTypes.number,
   initialRate: PropTypes.number,
   placeholderRate: PropTypes.number,
-  empty: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-      PropTypes.element
-    ])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object]),
-  placeholder: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-      PropTypes.element
-    ])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object]),
-  full: PropTypes.oneOfType([
-    // Array of class names and/or style objects.
-    PropTypes.arrayOf(PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-      PropTypes.element
-    ])),
-    // Class names.
-    PropTypes.string,
-    // Style objects.
-    PropTypes.object]),
+  empty: PropTypes.element,
+  placeholder: PropTypes.element,
+  full: PropTypes.element,
   readonly: PropTypes.bool,
-  quiet: PropTypes.bool,
+  animateOnHover: PropTypes.bool,
   fractions: PropTypes.number,
   scale: PropTypes.number,
   onChange: PropTypes.func,
   onClick: PropTypes.func,
-  onRate: PropTypes.func
+  onRate: PropTypes.func,
 }
 
-module.exports = Rating
+export default Rating
