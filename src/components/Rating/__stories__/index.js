@@ -9,7 +9,7 @@ storiesOf('Rating', module)
       <h2 className="title bold">Default</h2>
       <Rating />
       <h2 className="title bold">To 10</h2>
-      <Rating stop={10} />
+      <Rating animateOnHover stop={10} />
       <h2 className="title bold">Fractional values</h2>
       <Rating animateOnHover fractions={2} />
       <h2 className="title bold">Read-only</h2>

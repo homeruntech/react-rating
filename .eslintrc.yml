@@ -2,7 +2,6 @@ parser: babel-eslint
 extends:
   - airbnb
 rules:
-  jsx-a11y/href-no-hash: 'off'
   max-len:
     - error
     - code: 120

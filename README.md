@@ -1,16 +1,18 @@
+[![Build Status](http://circleci-badges-max.herokuapp.com/img/filipposarzana/react-rating?token=d1a85b80e64a18a5f60f22b0b1d03398717f30f2)](https://circleci.com/gh/filipposarzana/react-rating)
+
 # React Rating
 
-React Rating is a [react](https://github.com/facebook/react) rating component which supports custom symbols both with [inline styles](https://facebook.github.io/react/tips/inline-styles.html) and glyphicons found in popular CSS Toolkits like [Fontawesome](http://fortawesome.github.io/Font-Awesome/icons/) or [Bootstrap](http://getbootstrap.com/components/).
-
-I intend to port the jQuery [bootstrap-rating](https://github.com/dreyescat/bootstrap-rating) to a React component.
-
-## Demo
-
-See [react-rating](http://dreyescat.github.io/react-rating/) in action.
+React Rating is a [react](https://github.com/facebook/react) rating component built with `styled-components` [StyledComponent](https://github.com/styled-components/styled-components) 💅  and inspired by [ReactRating](https://github.com/dreyescat/react-rating/)
 
 ## Installation
 
-You can install `react-rating` component using the *npm* package manager:
+You can install `react-rating` component using the *yarn* package manager:
+
+```bash
+yarn add --save react-rating
+```
+
+or *npm*:
 
 ```bash
 npm install --save react-rating
@@ -20,27 +22,21 @@ npm install --save react-rating
 
 The `react-rating` component [peer depends](https://docs.npmjs.com/files/package.json#peerdependencies) on the [React](http://facebook.github.io/react/) library.
 
-You can install React using *npm* too:
+You can install React using *yarn* or *npm* too:
 
 ```bash
-npm install --save react
+yarn add --save react
 ```
 
 ## Usage
 
-1. Require the Rating Component
+1. Import Rating Component
 
     ```javascript
-    var Rating = require('react-rating');
+    import Rating from 'react-rating';
     ```
 
 2. Start using it
-
-    With raw javascript:
-
-    ```javascript
-    React.createElement(Rating)
-    ```
 
     Or with JSX:
 
@@ -52,26 +48,24 @@ npm install --save react
 
 Property          | Type                                           | Default              | Description
 ---               | ---                                            | ---                  | ---
-`start`           | *number*                                       | 0                    | Range starting value (exclusive).
-`stop`            | *number*                                       | 5                    | Range stop value (inclusive).
-`step`            | *number*                                       | 1                    | Step increment (positive) or decrement (negative).
-`placeholderRate` | *number*                                       | undefined            | Placeholder rate value.
-`initialRate`     | *number*                                       | undefined            | Initial rate value.
-`empty`           | *element* or *object* or *string* or *array*   | Style.empty          | React element, inline style object, or classes applied to the rating symbols when empty. Or an array of such symbols that will be applied in a circular manner (round-robin).
-`placeholder`     | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols in HTML input placeholder fashion. Or an array of such symbols that will be applied in a circular manner (round-robin).
-`full`            | *element* or *object* or *string* or *array*   | Style.full           | React element, inline style object, or classes applied to the rating symbols when full. Or an array of such symbols that will be applied in a circular manner (round-robin).
-`readonly`        | *bool*                                         | false                | Whether the rating can be modified or not.
-`quiet`           | *bool*                                         | false                | Whether to animate rate hovering or not.
-`fractions`       | *number*                                       | 1                    | Number of equal parts that make up a whole symbol.
+`start`           | *Number*                                       | 0                    | Range starting value.
+`stop`            | *Number*                                       | 5                    | Range stop value.
+`step`            | *Number*                                       | 1                    | Step increment (must be between *start* and *stop*).
+`initialRate`     | *Number*                                       | 0                    | Initial rate value.
+`emptyRate`       | *React Element*                                | Empty Star           | React Element
+`fullRate`        | *React Element*                                | Full Star            | React element
+`readonly`        | *Boolean*                                      | false                | Whether the rating can be modified or not.
+`animateOnHover`  | *Boolean*                                      | false                | Whether to animate rate hovering or not.
+`fractions`       | *Number*                                       | 1                    | Number of equal parts that make up a whole symbol.
 
 ## Callbacks
 
 Callback      | Type                           | Description
 ---           | ---                            | ---
-`onChange`    | function (rate) {}             | Called when the selected rate is changed.
-`onClick`     | function (rate, event) {}      | Called when a rate is clicked.
-`onRate`      | function (rate) {}             | Called when a rate is entered or left. When a rate is left it is called with `undefined`.
+`onChange`    | rate => {}                     | Called when the selected rate is changed.
+`onClick`     | (rate, event) => {}            | Called when a rate is clicked.
+`onRate`      | rate => {}                     | Called when a rate is entered or left. When a rate is left it is called with `undefined`.
 
 ## License
 
-[MIT License](https://github.com/dreyescat/react-rating/blob/master/LICENSE.md)
+[MIT License](https://github.com/filipposarzana/react-rating/blob/master/LICENSE.md)

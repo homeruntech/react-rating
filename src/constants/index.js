@@ -1,7 +1,7 @@
 import { noop } from '../utils'
 
 export const options = {
-  ANIMATE_ON_HOVER: true,
+  ANIMATE_ON_HOVER: false,
   FRACTIONS: 1,
   INITIAL_RATE: 0,
   ON_CHANGE: noop,

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import starEmpty from '../assets/star_empty.png'
-import starFull from '../assets/star_full.png'
-import { options, ratingTypes } from '../constants'
-import { getClientX, getFractionValue, paramsAreInvalid, range } from '../utils'
-import Rate from './Rate'
+import starEmpty from 'assets/star_empty.png'
+import starFull from 'assets/star_full.png'
+import { options, ratingTypes } from '../../constants'
+import { getClientX, getFractionValue, range, validateParams } from 'utils'
+import Rate from 'components/Rate'
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,12 +17,9 @@ class Rating extends Component {
   constructor(props) {
     super(props)
 
-    const { start, step, stop } = props
+    const { start, stop } = props
 
-    if (paramsAreInvalid({ start, step, stop })) {
-      // eslint-disable-next-line max-len
-      throw new Error('Validation of "start", "step", "stop" failed. Should be all greater than zero and both start and step lower than stop')
-    }
+    validateParams(props)
 
     this.getPercentage = this.getPercentage.bind(this)
     this.getRating = this.getRating.bind(this)

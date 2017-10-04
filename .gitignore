@@ -1,51 +1,16 @@
-# =========================
-# Operating System Files
-# =========================
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-# OSX
-# =========================
+# dependencies
+/node_modules
 
+# testing
+/coverage
+
+# storybook
+/storybook
+/storybook-static
+
+# misc
 .DS_Store
-.AppleDouble
-.LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-# =========================
-# Custom rules
-# =========================
-
-# Ignore npm modules
-node_modules
-
-# Ignore vim temporary files
-*.swp
-
-# Ignore dist folder
-
-
-# Ignore IDE files
-.project
-.vscode
-.settings
-.cache
-
-# Logs
-logs
-*.log
+npm-debug.log*
+yarn-error.log*
