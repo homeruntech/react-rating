@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import starEmpty from 'assets/star_empty.png'
-import starFull from 'assets/star_full.png'
+import Rate from '../Rate'
 import { options, ratingTypes } from '../../constants'
-import { getClientX, getFractionValue, range, validateParams } from 'utils'
-import Rate from 'components/Rate'
+import { getClientX, getFractionValue, range, validateParams } from '../../utils'
+import starEmpty from '../../assets/star_empty.png'
+import starFull from '../../assets/star_full.png'
 
 const Wrapper = styled.div`
   display: flex;

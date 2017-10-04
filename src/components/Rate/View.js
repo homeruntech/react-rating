@@ -17,8 +17,7 @@ const Icon = styled.span`
   top: 0;
   transition: width .1s ease-out;
   width: ${({ fixedPercentage, hoverPercentage }) =>
-    `${(hoverPercentage > fixedPercentage ? hoverPercentage : fixedPercentage)}%`
-  };
+    `${(hoverPercentage > fixedPercentage ? hoverPercentage : fixedPercentage)}%`};
   will-change: width;
 `
 

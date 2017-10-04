@@ -1,7 +1,11 @@
 parser: babel-eslint
 extends:
   - airbnb
+plugins:
+  - flowtype
+  - react
 rules:
+  jsx-a11y/href-no-hash: 'off'
   max-len:
     - error
     - code: 120
@@ -21,6 +25,8 @@ globals:
   jest: false
   "$Keys": false
 settings:
+  flowtype:
+    onlyFilesWithFlowAnnotation: true
   import/resolver:
     node:
       moduleDirectory:
