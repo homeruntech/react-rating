@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-// import debounce from 'lodash/debounce'
 import starEmpty from '../assets/star_empty.png'
 import starFull from '../assets/star_full.png'
-import { options } from '../constants'
-import { range, validateRange } from '../utils'
+import { options, ratingTypes } from '../constants'
+import { getClientX, getFractionValue, paramsAreInvalid, range } from '../utils'
 import Rate from './Rate'
 
 const Wrapper = styled.div`
@@ -18,64 +17,62 @@ class Rating extends Component {
   constructor(props) {
     super(props)
 
-    const { initialRate, start, step, stop } = props
+    const { start, step, stop } = props
 
-    if (validateRange({ step, start, stop })) {
-      throw new Error('Validation fails.')
+    if (paramsAreInvalid({ start, step, stop })) {
+      // eslint-disable-next-line max-len
+      throw new Error('Validation of "start", "step", "stop" failed. Should be all greater than zero and both start and step lower than stop')
     }
 
     this.getPercentage = this.getPercentage.bind(this)
     this.getRating = this.getRating.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.handleMouseLeave = this.handleMouseLeave.bind(this)
     this.handleMouseMove = this.handleMouseMove.bind(this)
     this.propsAreChanged = this.propsAreChanged.bind(this)
 
     this.state = {
-      currentRating: this.getRating(),
-      elements: range(stop, (_, i) => `react-rating-${i}`),
+      [ratingTypes.FIXED]: this.getRating(),
+      elements: range((stop - start), (_, i) => `react-rating-${i}`),
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    const { initialRate } = nextProps
-
     if (this.propsAreChanged(nextProps)) {
       this.setState({
-        currentRating: this.getRating(),
-        isSelected: !initialRate,
+        [ratingTypes.FIXED]: this.getRating(),
       })
     }
   }
 
-  getPercentage(i) {
-    const { animateOnHover } = this.props
-    const { currentRating, indexOver } = this.state
+  getFractionRoundedValue(event) {
+    const x = getClientX(event) - event.currentTarget.getBoundingClientRect().left
 
-    const currentRatingValue = animateOnHover ? indexOver || currentRating : currentRating
+    return this.round(x / event.currentTarget.offsetWidth)
+  }
+
+  getPercentage(index, ratingType) {
+    const currentRatingValue = this.state[ratingType]
     const currentRoundedRatingValue = Math.floor(currentRatingValue)
 
-    if (i === currentRoundedRatingValue) {
-      return currentRatingValue % 1 * 100
+    if (index === currentRoundedRatingValue) {
+      return (currentRatingValue % 1) * 100
     }
 
-    return i - currentRoundedRatingValue < 0 ? 100 : 0
+    return index - currentRoundedRatingValue < 0 ? 100 : 0
   }
 
   getRating() {
-    const { initialRate, start, step} = this.props
+    const { initialRate, start, step } = this.props
 
     return (initialRate - start) / step || 0
   }
 
-  propsAreChanged({ initialRate, start, stop }) {
-    return initialRate !== this.props.initialRate || start !== this.props.start || stop !== this.props.stop
-  }
-
-  handleClick(event, i) {
+  handleClick(event, index) {
     const { onClick, onChange } = this.props
     const { currentRating } = this.state
 
-    const calculatedIndex = i + this.fractionalIndex(event)
+    const calculatedIndex = index + this.getFractionRoundedValue(event)
 
     onClick(this.indexToRate(calculatedIndex), event)
 
@@ -83,85 +80,70 @@ class Rating extends Component {
       onChange(this.indexToRate(calculatedIndex))
 
       this.setState({
-        currentRating: calculatedIndex,
-        indexOver: undefined,
-        isSelected: true,
+        [ratingTypes.FIXED]: calculatedIndex,
+        [ratingTypes.HOVER]: 0,
       })
     }
   }
 
-  handleMouseMove(event, i) {
-    const { animateOnHover, onRate } = this.props
-    const { indexOver } = this.state
+  handleMouseLeave() {
+    this.setState({
+      [ratingTypes.HOVER]: 0,
+    })
+  }
 
-    if (!animateOnHover) {
-      return
-    }
+  handleMouseMove(event, index) {
+    const { onRate } = this.props
+    const { currentRatingHover } = this.state
 
-    const calculatedIndex = i + this.fractionalIndex(event)
+    const calculatedIndex = index + this.getFractionRoundedValue(event)
 
-    if (indexOver !== calculatedIndex) {
+    if (currentRatingHover !== calculatedIndex) {
       onRate(this.indexToRate(calculatedIndex))
 
       this.setState({
-        indexOver: calculatedIndex,
+        [ratingTypes.HOVER]: calculatedIndex,
       })
     }
   }
 
-  // Calculate the rate of an index according the the start and step.
   indexToRate(index) {
     const { start, step } = this.props
 
-    return start + (Math.floor(index) * step) + (step * this.roundToFraction(index % 1))
+    return start + (Math.floor(index) * step) + (step * this.round(index % 1))
   }
 
-  roundToFraction(index) {
-    const { fractions, scale, stop } = this.props
-    // Get the closest top fraction.
-    const fraction = Math.ceil((index % 1) * fractions) / fractions
-    // Truncate decimal trying to avoid float precission issues.
-    const precision = scale ** 10
-    const roundedValue = Math.floor(index) + (Math.floor(fraction * precision) / precision)
-    // Handles bugs when the touchend is past the star stop
-    return roundedValue > stop ? stop : roundedValue
+  propsAreChanged({ initialRate, start, stop }) {
+    return initialRate !== this.props.initialRate || start !== this.props.start || stop !== this.props.stop
   }
 
-  fractionalIndex(event) {
-    let clientX
+  round(index) {
+    const { fractions, stop } = this.props
+    const value = getFractionValue(index, fractions)
 
-    if (event.nativeEvent.type.indexOf('touch') > -1) {
-      if (event.nativeEvent.type.indexOf('touchend') > -1) {
-        clientX = event.changedTouches[0].clientX
-      } else {
-        clientX = event.touches[0].clientX
-      }
-    } else {
-      clientX = event.clientX
-    }
-
-    const x = clientX - event.currentTarget.getBoundingClientRect().left
-
-    return this.roundToFraction(x / event.currentTarget.offsetWidth)
+    return value > stop ? stop : value
   }
 
   render() {
-    const { animateOnHover, initialRate, empty, full, readonly } = this.props
-    const { currentRating, elements, indexOver, isSelected } = this.state
+    const { animateOnHover, emptyRate, fullRate, readonly } = this.props
+    const { elements } = this.state
 
     return (
-      <Wrapper readonly={readonly}>
-        {elements.map((element, i) => (
+      <Wrapper onMouseLeave={this.handleMouseLeave} readonly={readonly}>
+        {elements.map((element, index) => (
           <Rate
+            animateOnHover={animateOnHover}
             key={element}
-            background={empty}
-            icon={full}
-            percentage={this.getPercentage(i)}
+            emptyRate={emptyRate}
+            index={index}
+            fixedPercentage={this.getPercentage(index, ratingTypes.FIXED)}
+            fullRate={fullRate}
+            hoverPercentage={this.getPercentage(index, ratingTypes.HOVER)}
             readonly={readonly}
-            onClick={event => this.handleClick(event, i)}
-            onMouseMove={event => this.handleMouseMove(event, i)}
-            onTouchMove={event => this.handleMouseMove(event, i)}
-            onTouchEnd={event => this.handleClick(event, i)}
+            onClick={this.handleClick}
+            onMouseMove={this.handleMouseMove}
+            onTouchMove={this.handleMouseMove}
+            onTouchEnd={this.handleClick}
           />
         ))}
       </Wrapper>
@@ -170,35 +152,33 @@ class Rating extends Component {
 }
 
 Rating.defaultProps = {
-  start: options.START,
-  stop: options.STOP,
-  step: options.STEP,
-  empty: <img alt="" className="empty" src={starEmpty} />,
-  initialRate: options.INITIAL_RATE,
-  full: <img alt="" className="full" src={starFull} />,
-  fractions: options.FRACTIONS,
-  scale: 3,
   animateOnHover: options.ANIMATE_ON_HOVER,
-  readonly: options.READONLY,
+  emptyRate: <img alt="" className="emptyRate" src={starEmpty} />,
+  fractions: options.FRACTIONS,
+  fullRate: <img alt="" className="fullRate" src={starFull} />,
+  initialRate: options.INITIAL_RATE,
   onChange: options.ON_CHANGE,
   onClick: options.ON_CLICK,
   onRate: options.ON_RATE,
+  readonly: options.READONLY,
+  start: options.START,
+  step: options.STEP,
+  stop: options.STOP,
 }
 
 Rating.propTypes = {
-  start: PropTypes.number,
-  stop: PropTypes.number,
-  step: PropTypes.number,
-  initialRate: PropTypes.number,
-  empty: PropTypes.element,
-  full: PropTypes.element,
-  readonly: PropTypes.bool,
   animateOnHover: PropTypes.bool,
+  emptyRate: PropTypes.element,
   fractions: PropTypes.number,
-  scale: PropTypes.number,
+  fullRate: PropTypes.element,
+  initialRate: PropTypes.number,
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   onRate: PropTypes.func,
+  readonly: PropTypes.bool,
+  start: PropTypes.number,
+  step: PropTypes.number,
+  stop: PropTypes.number,
 }
 
 export default Rating

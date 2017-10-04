@@ -22,6 +22,10 @@
     "type": "git",
     "url": "https://github.com/filipposarzana/react-rating.git"
   },
+  "moduleRoots": [
+    "",
+    "src"
+  ],
   "keywords": [
     "rating",
     "react",
@@ -38,6 +42,7 @@
     "react": ">=16.0.0"
   },
   "devDependencies": {
+    "@storybook/react": "^3.2.11",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
@@ -59,7 +64,6 @@
     "onchange": "^3.2.1",
     "open-browser-webpack-plugin": "^0.0.5",
     "prismjs": "^1.6.0",
-    "@storybook/react": "^3.2.11",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
   },
