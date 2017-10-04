@@ -14,8 +14,6 @@
     "eslint:watch": "onchange './src' -iw -- yarn eslint 2> /dev/null",
     "eslint": "clear && eslint ./src && echo \"No errors found.\"",
     "start": "webpack-dev-server --progress --colors --host 0.0.0.0 --port 8080",
-    "test:coverage": "yarn test -- --coverage --watch",
-    "test": "react-scripts test --env=jsdom",
     "storybook": "NODE_PATH=src start-storybook -p 9010"
   },
   "repository": {
