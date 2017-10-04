@@ -4,8 +4,8 @@ import styled from 'styled-components'
 
 const Item = styled.a`
   display: flex;
-  cursor: pointer;
   position: relative;
+  ${({ readonly }) => (readonly ? 'pointer-events: none;' : 'cursor: pointer;')}
 `
 
 const Icon = styled.span`
@@ -16,20 +16,19 @@ const Icon = styled.span`
   position: absolute;
   top: 0;
   transition: width .1s ease-out;
-  width: ${({ percent }) => `${percent}%`};
+  width: ${({ percentage }) => `${percentage}%`};
   will-change: width;
-  ${({ readonly }) => (readonly ? 'pointer-events: none;' : null)}
 `
 
-const Rate = ({ background, icon, onClick, onMouseMove, percent, readonly }) => (
+const Rate = ({ background, icon, onClick, onMouseMove, percentage, readonly }) => (
   <Item onClick={onClick} onMouseMove={onMouseMove} onTouchMove={onMouseMove} onTouchEnd={onClick} readonly={readonly}>
     {background}
-    <Icon percent={percent}>{icon}</Icon>
+    <Icon percentage={percentage}>{icon}</Icon>
   </Item>
 )
 
 Rate.defaultProps = {
-  percent: 0,
+  percentage: 0,
 }
 
 Rate.propTypes = {
@@ -37,7 +36,7 @@ Rate.propTypes = {
   icon: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
   onMouseMove: PropTypes.func.isRequired,
-  percent: PropTypes.number,
+  percentage: PropTypes.number,
   readonly: PropTypes.bool.isRequired,
 }
 

@@ -4,88 +4,101 @@ import styled from 'styled-components'
 // import debounce from 'lodash/debounce'
 import starEmpty from '../assets/star_empty.png'
 import starFull from '../assets/star_full.png'
-import { indexOf, noop } from '../utils'
+import { options } from '../constants'
+import { range, validateRange } from '../utils'
 import Rate from './Rate'
 
 const Wrapper = styled.div`
   display: flex;
   flex: 1 0 auto;
+  ${({ readonly }) => (readonly ? 'pointer-events: none;' : null)}
 `
 
 class Rating extends Component {
   constructor(props) {
     super(props)
 
-    const { initialRate, placeholderRate } = props
+    const { initialRate, start, step, stop } = props
 
-    this.state = {
-      index: indexOf(props, initialRate || placeholderRate),
+    if (validateRange({ step, start, stop })) {
+      throw new Error('Validation fails.')
     }
 
+    this.getPercentage = this.getPercentage.bind(this)
+    this.getRating = this.getRating.bind(this)
     this.handleClick = this.handleClick.bind(this)
-    this.handleGetElement = this.handleGetElement.bind(this)
-    this.handleMouseLeave = this.handleMouseLeave.bind(this)
     this.handleMouseMove = this.handleMouseMove.bind(this)
+    this.propsAreChanged = this.propsAreChanged.bind(this)
+
+    this.state = {
+      currentRating: this.getRating(),
+      elements: range(stop, (_, i) => `react-rating-${i}`),
+    }
   }
 
-  componentWillReceiveProps({ initialRate, placeholderRate, start, stop }) {
-    this.setState({
-      index: indexOf({ start, stop }, initialRate || placeholderRate),
-      selected: !initialRate,
-    })
+  componentWillReceiveProps(nextProps) {
+    const { initialRate } = nextProps
+
+    if (this.propsAreChanged(nextProps)) {
+      this.setState({
+        currentRating: this.getRating(),
+        isSelected: !initialRate,
+      })
+    }
   }
 
-  handleGetElement(container) {
-    this.ratingContainer = container
+  getPercentage(i) {
+    const { animateOnHover } = this.props
+    const { currentRating, indexOver } = this.state
+
+    const currentRatingValue = animateOnHover ? indexOver || currentRating : currentRating
+    const currentRoundedRatingValue = Math.floor(currentRatingValue)
+
+    if (i === currentRoundedRatingValue) {
+      return currentRatingValue % 1 * 100
+    }
+
+    return i - currentRoundedRatingValue < 0 ? 100 : 0
+  }
+
+  getRating() {
+    const { initialRate, start, step} = this.props
+
+    return (initialRate - start) / step || 0
+  }
+
+  propsAreChanged({ initialRate, start, stop }) {
+    return initialRate !== this.props.initialRate || start !== this.props.start || stop !== this.props.stop
   }
 
   handleClick(event, i) {
-    const { onClick, onChange, readonly } = this.props
-    const { index } = this.state
-
-    if (readonly) {
-      return
-    }
+    const { onClick, onChange } = this.props
+    const { currentRating } = this.state
 
     const calculatedIndex = i + this.fractionalIndex(event)
 
     onClick(this.indexToRate(calculatedIndex), event)
 
-    if (index !== calculatedIndex) {
+    if (currentRating !== calculatedIndex) {
       onChange(this.indexToRate(calculatedIndex))
 
       this.setState({
-        index: calculatedIndex,
+        currentRating: calculatedIndex,
         indexOver: undefined,
-        selected: true,
+        isSelected: true,
       })
     }
   }
 
-  handleMouseLeave() {
-    const { onRate, readonly } = this.props
-
-    if (readonly) {
-      return
-    }
-
-    onRate()
-
-    this.setState({
-      indexOver: undefined,
-    })
-  }
-
   handleMouseMove(event, i) {
-    const { animateOnHover, onRate, readonly } = this.props
+    const { animateOnHover, onRate } = this.props
     const { indexOver } = this.state
 
-    if (!animateOnHover || readonly) {
+    if (!animateOnHover) {
       return
     }
 
     const calculatedIndex = i + this.fractionalIndex(event)
-    console.log(calculatedIndex) // eslint-disable-line no-console
 
     if (indexOver !== calculatedIndex) {
       onRate(this.indexToRate(calculatedIndex))
@@ -101,12 +114,6 @@ class Rating extends Component {
     const { start, step } = this.props
 
     return start + (Math.floor(index) * step) + (step * this.roundToFraction(index % 1))
-  }
-
-  // Calculate the corresponding index for a rate according to the provided
-  // props or this.props.
-  rateToIndex(rate) {
-    return indexOf(this.props, rate)
   }
 
   roundToFraction(index) {
@@ -139,90 +146,43 @@ class Rating extends Component {
   }
 
   render() {
-    const {
-      animateOnHover,
-      start,
-      stop,
-      step,
-      initialRate,
-      placeholderRate,
-      empty,
-      full,
-      placeholder,
-      readonly,
-      fractions,
-      scale,
-      onChange,
-      onClick,
-      onRate,
-      ...other
-    } = this.props
-    const symbolNodes = []
-    // The symbol with the mouse over prevails over the selected one,
-    // provided that we are not in quiet mode.
-    const index = animateOnHover ? this.state.indexOver || this.state.index : this.state.index
-    // The index of the last full symbol or NaN if index is undefined.
-    const lastFullIndex = Math.floor(index)
-    // Render the number of whole symbols.
-
-    const icon = !this.state.selected &&
-      !initialRate &&
-      placeholderRate &&
-      (!animateOnHover || this.state.indexOver === undefined) ?
-      placeholder : full
-
-    for (let i = 0; i < Math.floor(this.rateToIndex(stop)); i += 1) {
-      // Return the percentage of the decimal part of the last full index,
-      // 100 percent for those below the last full index or 0 percent for those
-      // indexes NaN or above the last full index.
-      let percent
-      console.log('i - lastFullIndex', i, lastFullIndex) // eslint-disable-line no-console
-      if (i - lastFullIndex === 0) {
-        percent = (index % 1) * 100
-      } else {
-        percent = i - lastFullIndex < 0 ? 100 : 0
-      }
-
-      console.log('PERCENTAGE', percent) // eslint-disable-line no-console
-
-      symbolNodes.push(
-        <Rate
-          key={i}
-          background={empty}
-          icon={icon}
-          percent={percent}
-          onClick={event => this.handleClick(event, i)}
-          onMouseMove={event => this.handleMouseMove(event, i)}
-          onTouchMove={event => this.handleMouseMove(event, i)}
-          onTouchEnd={event => this.handleClick(event, i)}
-        />,
-      )
-    }
+    const { animateOnHover, initialRate, empty, full, readonly } = this.props
+    const { currentRating, elements, indexOver, isSelected } = this.state
 
     return (
-      <Wrapper ref={this.handleGetElement} onMouseLeave={this.handleMouseLeave} {...other}>
-        {symbolNodes}
+      <Wrapper readonly={readonly}>
+        {elements.map((element, i) => (
+          <Rate
+            key={element}
+            background={empty}
+            icon={full}
+            percentage={this.getPercentage(i)}
+            readonly={readonly}
+            onClick={event => this.handleClick(event, i)}
+            onMouseMove={event => this.handleMouseMove(event, i)}
+            onTouchMove={event => this.handleMouseMove(event, i)}
+            onTouchEnd={event => this.handleClick(event, i)}
+          />
+        ))}
       </Wrapper>
     )
   }
 }
 
 Rating.defaultProps = {
-  start: 0,
-  stop: 5,
-  step: 1,
+  start: options.START,
+  stop: options.STOP,
+  step: options.STEP,
   empty: <img alt="" className="empty" src={starEmpty} />,
-  initialRate: 0,
-  placeholderRate: 0,
-  placeholder: <img alt="" className="placeholder" src={starEmpty} />,
+  initialRate: options.INITIAL_RATE,
   full: <img alt="" className="full" src={starFull} />,
-  fractions: 1,
+  fractions: options.FRACTIONS,
   scale: 3,
-  animateOnHover: false,
-  readonly: false,
-  onChange: noop,
-  onClick: noop,
-  onRate: noop,
+  animateOnHover: options.ANIMATE_ON_HOVER,
+  readonly: options.READONLY,
+  onChange: options.ON_CHANGE,
+  onClick: options.ON_CLICK,
+  onRate: options.ON_RATE,
 }
 
 Rating.propTypes = {
@@ -230,9 +190,7 @@ Rating.propTypes = {
   stop: PropTypes.number,
   step: PropTypes.number,
   initialRate: PropTypes.number,
-  placeholderRate: PropTypes.number,
   empty: PropTypes.element,
-  placeholder: PropTypes.element,
   full: PropTypes.element,
   readonly: PropTypes.bool,
   animateOnHover: PropTypes.bool,

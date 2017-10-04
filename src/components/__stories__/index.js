@@ -7,6 +7,6 @@ storiesOf('Rating', module)
   .add('All Examples', () => (
     <div>
       <h2 className="title bold">Default</h2>
-      <Rating animateOnHover fractions={2} start={0} stop={5} />
+      <Rating animateOnHover fractions={2} />
     </div>
   ))
