@@ -32,6 +32,25 @@
     "url": "https://github.com/filipposarzana/react-rating/issues"
   },
   "homepage": "https://github.com/filipposarzana/react-rating",
+  "jest": {
+    "coverageReporters": [
+      "text-summary",
+      "html"
+    ],
+    "collectCoverageFrom": [
+      "src/components/**/*.js",
+      "src/utils/**/*.js",
+      "!src/**/__stories__/**/*.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 73,
+        "functions": 75,
+        "lines": 72,
+        "statements": 72
+      }
+    }
+  },
   "peerDependencies": {
     "react": ">=16.0.0"
   },
@@ -40,12 +59,12 @@
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
     "eslint": "^4.8.0",
-    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-flowtype": "^2.37.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
-    "flow-bin": "^0.56.0",
+    "flow-bin": "^0.59.0",
     "onchange": "^3.2.1",
     "react-addons-test-utils": "^15.6.2",
     "react-scripts": "^1.0.14",
@@ -71,8 +90,7 @@
     "storybook": "NODE_PATH=src start-storybook -p 9009 -s public",
     "storybook:build": "mkdir -p dist && NODE_PATH=src build-storybook -c .storybook -o dist/storybook",
     "test:ci": "yarn test -- --colors --lastCommit --runInBand --silent",
-    "test:coverage": "yarn test -- --coverage --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/**/__stories__/* --collectCoverageFrom=!src/index.js",
-    "test:coverage:watch": "yarn test:coverage -- --watch",
-    "test": "react-scripts test --env=jsdom"
+    "test:watch": "yarn test -- --watch",
+    "test": "react-scripts test --coverage --env=jsdom"
   }
 }

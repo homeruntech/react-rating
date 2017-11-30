@@ -5,7 +5,7 @@ plugins:
   - flowtype
   - react
 rules:
-  jsx-a11y/href-no-hash: 'off'
+  object-curly-newline: 'off'
   max-len:
     - error
     - code: 120

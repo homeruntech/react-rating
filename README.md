@@ -33,7 +33,7 @@ yarn add --save react
 1. Import Rating Component
 
     ```javascript
-    import Rating from 'react-rating';
+    import Rating from 'react-rating'
     ```
 
 2. Start using it

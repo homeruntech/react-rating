@@ -26,5 +26,3 @@ jobs:
       - run: yarn eslint
 
       - run: yarn test:ci
-
-      - run: yarn test:coverage
