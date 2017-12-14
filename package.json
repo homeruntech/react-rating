@@ -1,6 +1,6 @@
 {
   "name": "awesome-react-rating",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An awesome React Rating component",
   "main": "dist/main.js",
   "files": [
