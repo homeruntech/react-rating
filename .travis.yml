@@ -1,0 +1,16 @@
+---
+dist: precise
+language: node_js
+node_js:
+  - 9
+cache:
+  yarn: true
+  directories:
+  - node_modules
+install: true
+script:
+ - yarn
+ - yarn eslint
+ - yarn test:ci
+ - yarn build
+ - yarn dist

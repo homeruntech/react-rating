@@ -1,7 +1,7 @@
 {
-  "name": "react-rating",
-  "version": "1.0.0",
-  "description": "A React Rating component",
+  "name": "awesome-react-rating",
+  "version": "0.1.0",
+  "description": "An awesome React Rating component",
   "main": "src/react-rating.js",
   "files": [
     "README.md",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/filipposarzana/react-rating.git"
+    "url": "https://github.com/ProntoPro/awesome-react-rating.git"
   },
   "moduleRoots": [
     "",
@@ -26,12 +26,12 @@
     "component",
     "react-component"
   ],
-  "author": "filipposarzana",
+  "author": "ProntoPro",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/filipposarzana/react-rating/issues"
+    "url": "https://github.com/ProntoPro/awesome-react-rating/issues"
   },
-  "homepage": "https://github.com/filipposarzana/react-rating",
+  "homepage": "https://github.com/ProntoPro/awesome-react-rating",
   "jest": {
     "coverageReporters": [
       "text-summary",
@@ -82,8 +82,8 @@
   "scripts": {
     "build": "react-scripts build",
     "dist:assets": "sync-files src/assets dist/assets",
-    "dist:js": "cp dist/static/js/main.*.js dist/static/js/bundle.js",
-    "dist": "sync-files build dist && yarn dist:assets && yarn dist:js",
+    "dist:js": "cp build/static/js/main.*.js dist/main.js",
+    "dist": "yarn dist:assets && yarn dist:js",
     "eslint:watch": "onchange './src' -iw -- yarn eslint 2> /dev/null",
     "eslint": "clear && eslint ./src && echo \"No errors found.\"",
     "start": "react-scripts start",
