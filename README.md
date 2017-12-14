@@ -1,4 +1,4 @@
-[![Build Status](http://circleci-badges-max.herokuapp.com/img/filipposarzana/react-rating?token=d1a85b80e64a18a5f60f22b0b1d03398717f30f2)](https://circleci.com/gh/filipposarzana/react-rating)
+[![Build Status](https://travis-ci.org/ProntoPro/awesome-react-rating.svg?branch=master)](https://travis-ci.org/ProntoPro/awesome-react-rating)
 
 # React Rating
 
@@ -6,21 +6,21 @@ React Rating is a [react](https://github.com/facebook/react) rating component bu
 
 ## Installation
 
-You can install `react-rating` component using the *yarn* package manager:
+You can install `awesome-react-rating` component using the *yarn* package manager:
 
 ```bash
-yarn add --save react-rating
+yarn add --save awesome-react-rating
 ```
 
 or *npm*:
 
 ```bash
-npm install --save react-rating
+npm install --save awesome-react-rating
 ```
 
 ### Dependencies
 
-The `react-rating` component [peer depends](https://docs.npmjs.com/files/package.json#peerdependencies) on the [React](http://facebook.github.io/react/) library.
+The `awesome-react-rating` component [peer depends](https://docs.npmjs.com/files/package.json#peerdependencies) on the [React](http://facebook.github.io/react/) library.
 
 You can install React using *yarn* or *npm* too:
 
@@ -33,7 +33,7 @@ yarn add --save react
 1. Import Rating Component
 
     ```javascript
-    import Rating from 'react-rating'
+    import Rating from 'awesome-react-rating'
     ```
 
 2. Start using it
@@ -68,4 +68,4 @@ Callback      | Type                           | Description
 
 ## License
 
-[MIT License](https://github.com/filipposarzana/react-rating/blob/master/LICENSE.md)
+[MIT License](https://github.com/ProntoPro/awesome-react-rating/blob/master/LICENSE.md)
