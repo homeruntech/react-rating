@@ -13,4 +13,3 @@ script:
  - yarn eslint
  - yarn test:ci
  - yarn build
- - yarn dist

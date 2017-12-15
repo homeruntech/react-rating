@@ -9,13 +9,13 @@ React Rating is a [react](https://github.com/facebook/react) rating component bu
 You can install `awesome-react-rating` component using the *yarn* package manager:
 
 ```bash
-yarn add --save awesome-react-rating
+yarn add --save @prontopro/awesome-react-rating
 ```
 
 or *npm*:
 
 ```bash
-npm install --save awesome-react-rating
+npm install --save @prontopro/awesome-react-rating
 ```
 
 ### Dependencies

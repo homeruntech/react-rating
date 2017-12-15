@@ -1,8 +1,8 @@
 {
-  "name": "awesome-react-rating",
-  "version": "0.1.2",
+  "name": "@prontopro/awesome-react-rating",
+  "version": "0.1.3",
   "description": "An awesome React Rating component",
-  "main": "dist/main.js",
+  "main": "dist/index.js",
   "files": [
     "README.md",
     "LICENSE.md",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ProntoPro/awesome-react-rating.git"
+    "url": "git+https://github.com/ProntoPro/awesome-react-rating.git"
   },
   "moduleRoots": [
     "",
@@ -56,6 +56,14 @@
   },
   "devDependencies": {
     "@storybook/react": "^3.2.12",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-inline-import-data-uri": "^1.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-flow": "^6.23.0",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
     "eslint": "^4.8.0",
@@ -69,7 +77,8 @@
     "react-addons-test-utils": "^15.6.2",
     "react-scripts": "^1.0.14",
     "react-test-renderer": "^16.0.0",
-    "sync-files": "^1.0.3"
+    "sync-files": "^1.0.3",
+    "webpack": "^2.6.1"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
@@ -77,13 +86,11 @@
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-tap-event-plugin": "^3.0.2",
-    "styled-components": "^2.2.1"
+    "styled-components": "^2.2.1",
+    "fsevents": "*"
   },
   "scripts": {
-    "build": "react-scripts build",
-    "dist:assets": "sync-files src/assets dist/assets",
-    "dist:js": "cp build/static/js/main.*.js dist/main.js",
-    "dist": "yarn dist:assets && yarn dist:js",
+    "build": "webpack",
     "eslint:watch": "onchange './src' -iw -- yarn eslint 2> /dev/null",
     "eslint": "clear && eslint ./src && echo \"No errors found.\"",
     "start": "react-scripts start",
