@@ -5,24 +5,19 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
-    libraryTarget: 'commonjs2',
   },
   module: {
-    rules: [
-      {
-        test: /\.(js|png)$/,
-        include: path.resolve(__dirname, 'src'),
-        exclude: /(build|setupTests|node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['env']
-          }
-        }
+    loaders: [{
+      test: /\.js$/,
+      loader: 'babel-loader',
+      exclude: /node_modules/,
+      query: {
+        cacheDirectory: true,
+        presets: ['react', 'es2015']
       }
-    ]
+    }]
   },
   externals: {
-    'react': 'commonjs react',
+    react: 'commonjs react',
   }
 }
