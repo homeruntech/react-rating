@@ -9,9 +9,7 @@
     "dist/",
     "src/"
   ],
-  "optionalDependencies": {
-    "fsevents": "*"
-  },
+  "optionalDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ProntoPro/awesome-react-rating.git"
