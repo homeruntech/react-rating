@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Rate from '../Rate'
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   ${({ readonly }) => (readonly ? 'pointer-events: none;' : null)}
 `
 
-class Rating extends Component {
+class Rating extends PureComponent {
   constructor(props) {
     super(props)
 
@@ -61,7 +61,9 @@ class Rating extends Component {
 
   getRating() {
     const { initialRate, start, step } = this.props
-
+    console.log(this.props)
+console.log(initialRate)
+console.log((initialRate - start) / step || 0)
     return (initialRate - start) / step || 0
   }
 

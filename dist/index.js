@@ -6537,8 +6537,8 @@ var Wrapper = _styledComponents2.default.div(_templateObject, function (_ref) {
   return readonly ? 'pointer-events: none;' : null;
 });
 
-var Rating = function (_Component) {
-  _inherits(Rating, _Component);
+var Rating = function (_PureComponent) {
+  _inherits(Rating, _PureComponent);
 
   function Rating(props) {
     var _this$state;
@@ -6600,7 +6600,9 @@ var Rating = function (_Component) {
           start = _props.start,
           step = _props.step;
 
-
+      console.log(this.props);
+      console.log(initialRate);
+      console.log((initialRate - start) / step || 0);
       return (initialRate - start) / step || 0;
     }
   }, {
@@ -6711,7 +6713,7 @@ var Rating = function (_Component) {
   }]);
 
   return Rating;
-}(_react.Component);
+}(_react.PureComponent);
 
 Rating.defaultProps = {
   animateOnHover: _constants.options.ANIMATE_ON_HOVER,
@@ -6791,7 +6793,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  position: relative;\n  ', '\n'], ['\n  display: flex;\n  position: relative;\n  ', '\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  display: block;\n  position: relative;\n  ', '\n'], ['\n  display: block;\n  position: relative;\n  ', '\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  display: block;\n  height: 100%;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  transition: width .1s ease-out;\n  width: ', ';\n  will-change: width;\n'], ['\n  display: block;\n  height: 100%;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  transition: width .1s ease-out;\n  width: ', ';\n  will-change: width;\n']);
 
 var _react = __webpack_require__(65);
@@ -6892,8 +6894,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Rate = function (_Component) {
-  _inherits(Rate, _Component);
+var Rate = function (_PureComponent) {
+  _inherits(Rate, _PureComponent);
 
   function Rate(props) {
     _classCallCheck(this, Rate);
@@ -6956,7 +6958,7 @@ var Rate = function (_Component) {
   }]);
 
   return Rate;
-}(_react.Component);
+}(_react.PureComponent);
 
 Rate.defaultProps = {
   fixedPercentage: 0,

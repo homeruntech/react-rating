@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Item = styled.a`
-  display: flex;
+  display: block;
   position: relative;
   ${({ readonly }) => (readonly ? 'pointer-events: none;' : 'cursor: pointer;')}
 `

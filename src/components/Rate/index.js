@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import View from './View'
 
-class Rate extends Component {
+class Rate extends PureComponent {
   constructor(props) {
     super(props)
 
