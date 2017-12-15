@@ -6600,9 +6600,7 @@ var Rating = function (_PureComponent) {
           start = _props.start,
           step = _props.step;
 
-      console.log(this.props);
-      console.log(initialRate);
-      console.log((initialRate - start) / step || 0);
+
       return (initialRate - start) / step || 0;
     }
   }, {

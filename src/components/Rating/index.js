@@ -61,9 +61,7 @@ class Rating extends PureComponent {
 
   getRating() {
     const { initialRate, start, step } = this.props
-    console.log(this.props)
-console.log(initialRate)
-console.log((initialRate - start) / step || 0)
+
     return (initialRate - start) / step || 0
   }
 
