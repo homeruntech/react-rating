@@ -52,7 +52,12 @@
     }
   },
   "peerDependencies": {
-    "react": ">=16.0.0"
+    "babel-polyfill": ">=6.26.0",
+    "prop-types": ">=15.6.0",
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0",
+    "react-tap-event-plugin": ">=3.0.2",
+    "styled-components": ">=2.2.1"
   },
   "devDependencies": {
     "@storybook/react": "^3.2.12",
@@ -81,14 +86,7 @@
     "react-test-renderer": "^16.0.0",
     "webpack": "^2.6.1"
   },
-  "dependencies": {
-    "babel-polyfill": "^6.26.0",
-    "prop-types": "^15.6.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-tap-event-plugin": "^3.0.2",
-    "styled-components": "^2.2.1"
-  },
+  "dependencies": {},
   "scripts": {
     "build": "webpack",
     "eslint:watch": "esw -w --clear --cache ./src",
