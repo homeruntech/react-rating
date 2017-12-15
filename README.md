@@ -33,7 +33,7 @@ yarn add --save react
 1. Import Rating Component
 
     ```javascript
-    import Rating from 'awesome-react-rating'
+    import Rating from '@prontopro/awesome-react-rating'
     ```
 
 2. Start using it
