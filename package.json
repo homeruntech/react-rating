@@ -9,7 +9,9 @@
     "dist/",
     "src/"
   ],
-  "optionalDependencies": {},
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ProntoPro/awesome-react-rating.git"
@@ -72,12 +74,11 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
+    "eslint-watch": "^3.1.3",
     "flow-bin": "^0.59.0",
-    "onchange": "^3.2.1",
     "react-addons-test-utils": "^15.6.2",
     "react-scripts": "^1.0.14",
     "react-test-renderer": "^16.0.0",
-    "sync-files": "^1.0.3",
     "webpack": "^2.6.1"
   },
   "dependencies": {
@@ -90,7 +91,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "eslint:watch": "onchange './src' -iw -- yarn eslint 2> /dev/null",
+    "eslint:watch": "esw -w --clear --cache ./src",
     "eslint": "clear && eslint ./src && echo \"No errors found.\"",
     "start": "react-scripts start",
     "storybook": "NODE_PATH=src start-storybook -p 9009 -s public",
