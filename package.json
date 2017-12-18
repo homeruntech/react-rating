@@ -54,6 +54,16 @@
   },
   "devDependencies": {
     "@storybook/react": "^3.2.12",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-inline-import-data-uri": "^1.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -78,7 +88,7 @@
     "styled-components": "^2.2.1"
   },
   "scripts": {
-    "build": "react-scripts build && cp build/static/js/main.*.js dist/index.js",
+    "build": "webpack",
     "eslint:watch": "esw -w --clear --cache ./src",
     "eslint": "clear && eslint ./src && echo \"No errors found.\"",
     "start": "react-scripts start",
