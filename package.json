@@ -53,7 +53,6 @@
     "react": ">=16.0.0"
   },
   "devDependencies": {
-    "@storybook/react": "^3.2.12",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
@@ -93,8 +92,6 @@
     "eslint:watch": "esw -w --clear --cache ./src",
     "eslint": "clear && eslint ./src && echo \"No errors found.\"",
     "start": "react-scripts start",
-    "storybook": "NODE_PATH=src start-storybook -p 9009 -s public",
-    "storybook:build": "mkdir -p dist && NODE_PATH=src build-storybook -c .storybook -o dist/storybook",
     "test:ci": "yarn test -- --colors --lastCommit --runInBand --silent",
     "test:watch": "yarn test -- --watch",
     "test": "react-scripts test --coverage --env=jsdom"
