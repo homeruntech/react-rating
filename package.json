@@ -9,7 +9,9 @@
     "dist/",
     "src/"
   ],
-  "optionalDependencies": {},
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ProntoPro/awesome-react-rating.git"
@@ -53,7 +55,6 @@
     "react": ">=16.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-plugin-inline-import-data-uri": "^1.0.1",
@@ -72,7 +73,7 @@
     "eslint-plugin-react": "^7.4.0",
     "eslint-watch": "^3.1.3",
     "flow-bin": "^0.61.0",
-    "glob": "^7.1.2",
+    "fs.realpath": "^1.0.0",
     "react-addons-test-utils": "^15.6.2",
     "react-scripts": "^1.0.17",
     "react-test-renderer": "^16.0.0",
