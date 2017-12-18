@@ -1,4 +1,14 @@
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("react"));
+	else if(typeof define === 'function' && define.amd)
+		define(["react"], factory);
+	else if(typeof exports === 'object')
+		exports["AwesomeReactRating"] = factory(require("react"));
+	else
+		root["AwesomeReactRating"] = factory(root["React"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_65__) {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -60,7 +70,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/home/filippo/Documents/awesome-react-rating/dist";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 139);
@@ -2067,7 +2077,7 @@ if (process.env.NODE_ENV !== 'production') {
 /* 65 */
 /***/ (function(module, exports) {
 
-module.exports = require("react");
+module.exports = __WEBPACK_EXTERNAL_MODULE_65__;
 
 /***/ }),
 /* 66 */
@@ -14862,3 +14872,4 @@ module.exports = function(originalModule) {
 
 /***/ })
 /******/ ]);
+});

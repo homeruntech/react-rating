@@ -5,6 +5,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
+    library: 'AwesomeReactRating',
+    libraryTarget: 'umd',
+    publicPath: path.resolve(__dirname, 'dist'),
   },
   module: {
     loaders: [{
@@ -12,12 +15,16 @@ module.exports = {
       loader: 'babel-loader',
       exclude: /node_modules/,
       query: {
-        cacheDirectory: true,
         presets: ['react', 'es2015']
       }
     }]
   },
   externals: {
-    react: 'commonjs react',
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react',
+    },
   }
 }
