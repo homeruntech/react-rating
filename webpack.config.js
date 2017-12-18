@@ -5,7 +5,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
-    libraryTarget: 'commonjs2',
+    library: 'AwesomeReactRating',
+    libraryTarget: 'umd',
   },
   module: {
     loaders: [{
@@ -13,13 +14,17 @@ module.exports = {
       loader: 'babel-loader',
       exclude: /(node_modules|__stories__)/,
       query: {
-        cacheDirectory: true,
-        presets: ['react', 'es2015']
-      }
+        presets: ['react', 'es2015'],
+      },
     }],
   },
   externals: {
-    react: 'commonjs react',
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react',
+    },
   },
   target: 'node',
 }

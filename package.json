@@ -26,9 +26,6 @@
     "component",
     "react-component"
   ],
-  "browser": {
-    "fs": false
-  },
   "author": "ProntoPro",
   "license": "MIT",
   "bugs": {
@@ -42,8 +39,7 @@
     ],
     "collectCoverageFrom": [
       "src/components/**/*.js",
-      "src/utils/**/*.js",
-      "!src/**/__stories__/**/*.js"
+      "src/utils/**/*.js"
     ],
     "coverageThreshold": {
       "global": {
@@ -79,7 +75,6 @@
     "react-addons-test-utils": "^15.6.2",
     "react-scripts": "^1.0.17",
     "react-test-renderer": "^16.0.0",
-    "sync-files": "^1.0.3",
     "webpack": "^3.10.0"
   },
   "dependencies": {
@@ -92,11 +87,11 @@
   },
   "scripts": {
     "build": "webpack",
-    "eslint:watch": "esw -w --clear --cache --ignore-pattern=__stories__ ./src",
+    "eslint:watch": "esw -w --clear --cache ./src",
     "eslint": "clear && eslint ./src && echo \"No errors found.\"",
     "start": "react-scripts start",
-    "test:ci": "yarn test -- --colors --lastCommit --runInBand --silent",
-    "test:watch": "yarn test -- --watch",
+    "test:ci": "yarn test --colors --lastCommit --runInBand --silent",
+    "test:watch": "yarn test --watch",
     "test": "react-scripts test --coverage --env=jsdom"
   }
 }
