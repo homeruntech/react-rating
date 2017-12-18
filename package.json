@@ -51,13 +51,6 @@
       }
     }
   },
-  "peerDependencies": {
-    "prop-types": ">=15.6.0",
-    "react": ">=16.0.0",
-    "react-dom": ">=16.0.0",
-    "react-tap-event-plugin": ">=3.0.2",
-    "styled-components": ">=2.3.0"
-  },
   "devDependencies": {
     "@storybook/react": "^3.2.12",
     "babel-cli": "^6.24.1",
