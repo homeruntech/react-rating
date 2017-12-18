@@ -1,6 +1,6 @@
 {
   "name": "@prontopro/awesome-react-rating",
-  "version": "0.1.30",
+  "version": "0.1.31",
   "description": "An awesome React Rating component",
   "main": "dist/index.js",
   "files": [
