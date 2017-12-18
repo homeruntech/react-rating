@@ -8,20 +8,22 @@ module.exports = {
     libraryTarget: 'commonjs2',
   },
   module: {
-    rules: [
-      {
-        test: /\.(js|png)$/,
-        include: path.resolve(__dirname, 'src'),
-        exclude: /(build|setupTests|node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['env']
-          }
-        }
-      }
-    ]
-  },
+  rules: [{
+      test: /\.(js|png)$/,
+      include: path.resolve(__dirname, 'src'),
+      exclude: /(build|setupTests|node_modules)/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: [
+            'env',
+            'es2015',
+            'react',
+          ],
+        },
+      },
+    },
+  ]},
   externals: {
     'react': 'commonjs react',
   }
