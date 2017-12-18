@@ -11,7 +11,7 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loader: 'babel-loader',
-      exclude: /node_modules/,
+      exclude: /(node_modules|__stories__)/,
       query: {
         cacheDirectory: true,
         presets: ['react', 'es2015']
