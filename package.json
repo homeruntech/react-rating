@@ -1,6 +1,6 @@
 {
   "name": "@prontopro/awesome-react-rating",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "An awesome React Rating component",
   "main": "dist/index.js",
   "files": [
@@ -81,6 +81,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
+    "babel-preset-stage-2": "^6.24.1",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -88,7 +89,7 @@
     "styled-components": "^2.2.1"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack -p --progress --hot",
     "eslint:watch": "esw -w --clear --cache ./src",
     "eslint": "clear && eslint ./src && echo \"No errors found.\"",
     "start": "react-scripts start",

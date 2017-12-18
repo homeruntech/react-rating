@@ -5,20 +5,16 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
-    libraryExport: 'default',
+    publicPath: '/',
+  },
+  resolve: {
+    extensions: ['*', '.js'],
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
-      loader: 'babel-loader',
       exclude: /node_modules/,
-      query: {
-        cacheDirectory: true,
-        presets: ['react', 'es2015']
-      }
-    }]
+      use: ['babel-loader']
+    }],
   },
-  externals: {
-    react: 'commonjs react',
-  }
 }
