@@ -75,9 +75,7 @@
     "react-addons-test-utils": "^15.6.2",
     "react-scripts": "^1.0.17",
     "react-test-renderer": "^16.0.0",
-    "webpack": "^3.10.0"
-  },
-  "dependencies": {
+    "webpack": "^3.10.0",
     "babel-polyfill": "^6.26.0",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
@@ -85,6 +83,7 @@
     "react-tap-event-plugin": "^3.0.2",
     "styled-components": "^2.2.1"
   },
+  "dependencies": {},
   "scripts": {
     "build": "webpack",
     "eslint:watch": "esw -w --clear --cache ./src",
