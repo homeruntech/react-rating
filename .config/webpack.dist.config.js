@@ -1,59 +1,59 @@
-var webpack = require('webpack');
-var path = require('path');
-var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
+const path = require('path')
+const webpack = require('webpack') // eslint-disable-line import/no-extraneous-dependencies
 
-var reactExternal = {
+const DIST_DIR = path.join(__dirname, '..', 'dist')
+const SOURCE_DIR = path.join(__dirname, '..', 'src')
+
+const REACT_EXTERNAL = {
   root: 'React',
   commonjs2: 'react',
   commonjs: 'react',
-  amd: 'react'
-};
+  amd: 'react',
+}
 
-var reactDOMExternal = {
+const REACT_DOM_EXTERNAL = {
   root: 'ReactDOM',
   commonjs2: 'react-dom',
   commonjs: 'react-dom',
-  amd: 'react-dom'
-};
+  amd: 'react-dom',
+}
 
 module.exports = {
-
   entry: {
-    'awesome-react-rating': './src/index.js',
-    'awesome-react-rating.min': './src/index.js'
+    'awesome-react-rating': path.join(SOURCE_DIR, 'index.js'),
+    'awesome-react-rating.min': path.join(SOURCE_DIR, 'index.js'),
   },
-
   externals: {
-    'react': reactExternal,
-    'react-dom': reactDOMExternal
+    react: REACT_EXTERNAL,
+    'react-dom': REACT_DOM_EXTERNAL,
   },
-
   output: {
     filename: '[name].js',
     chunkFilename: '[id].chunk.js',
-    path: path.join(__dirname, '..', 'dist'),
+    path: DIST_DIR,
     publicPath: '/',
     libraryTarget: 'umd',
-    library: 'AwesomeReactRating'
+    library: 'AwesomeReactRating',
   },
-
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
-    new UglifyJsPlugin({
+    new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.js$/,
       minimize: true,
       compress: {
-        warnings: false
-      }
-    })
+        warnings: false,
+      },
+    }),
   ],
-
   module: {
-    rules: [
-      { test: /\.js?$/, exclude: /node_modules/, use: { loader: 'babel-loader' } }
-    ]
-  }
-
-};
+    rules: [{
+      test: /\.js?$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+      },
+    }],
+  },
+}

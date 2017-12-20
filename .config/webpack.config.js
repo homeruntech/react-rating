@@ -1,53 +1,40 @@
-var fs = require('fs');
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack') // eslint-disable-line import/no-extraneous-dependencies
+const HtmlWebpackPlugin = require('html-webpack-plugin') // eslint-disable-line import/no-extraneous-dependencies
 
-var EXAMPLES_DIR = path.resolve(__dirname, 'examples');
+const EXAMPLES_DIR = path.join(__dirname, '..', '.examples')
+const SOURCE_DIR = path.join(__dirname, '..', 'src')
 
-function isDirectory(dir) {
-  return fs.lstatSync(dir).isDirectory();
-}
-
-function buildEntries() {
-  return fs.readdirSync(EXAMPLES_DIR).reduce(function (entries, dir) {
-    if (dir === 'build')
-      return entries;
-
-    var isDraft = dir.charAt(0) === '_';
-
-    if (!isDraft && isDirectory(path.join(EXAMPLES_DIR, dir)))
-      entries[dir] = path.join(EXAMPLES_DIR, dir, 'app.js');
-
-    return entries;
-  }, {});
-}
+const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: path.join(EXAMPLES_DIR, 'index.html'),
+  filename: 'index.html',
+  inject: 'body',
+})
 
 module.exports = {
-
-  entry: buildEntries(),
-
+  entry: path.join(EXAMPLES_DIR, 'index.js'),
   output: {
     filename: '[name].js',
-    chunkFilename: '[id].chunk.js',
-    path: path.resolve(__dirname, './examples/__build__'),
-    publicPath: '/__build__/'
+    path: path.join(EXAMPLES_DIR),
+    publicPath: '/',
   },
-
   module: {
-    rules: [
-      { test: /\.js$/, exclude: /node_modules/, use: { loader: 'babel-loader' } }
-    ]
+    rules: [{
+      test: /\.jsx?$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+      },
+    }],
   },
-
   resolve: {
     alias: {
-      "awesome-react-rating": path.resolve(__dirname, "./src")
-    }
+      '@prontopro/awesome-react-rating': SOURCE_DIR,
+    },
   },
-
   plugins: [
     new webpack.optimize.CommonsChunkPlugin('shared'),
-    new webpack.LoaderOptionsPlugin({ debug: true })
-  ]
-
-};
+    new webpack.LoaderOptionsPlugin({ debug: true }),
+    HtmlWebpackPluginConfig,
+  ],
+}
