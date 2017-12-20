@@ -29,7 +29,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@prontopro/awesome-react-rating': SOURCE_DIR,
+      '@prontopro/react-rating': SOURCE_DIR,
     },
   },
   plugins: [

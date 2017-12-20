@@ -1,13 +1,13 @@
 import React from 'react'
 import { render } from 'react-dom'
-import AwesomeReactRating from '@prontopro/awesome-react-rating'
+import ReactRating from '@prontopro/react-rating'
 
 const appElement = document.getElementById('example')
 
 const App = () => (
   <div>
-    <AwesomeReactRating />
-    <AwesomeReactRating animateOnHover />
+    <ReactRating />
+    <ReactRating animateOnHover />
   </div>
 )
 

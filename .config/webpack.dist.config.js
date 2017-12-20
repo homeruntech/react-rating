@@ -20,8 +20,8 @@ const REACT_DOM_EXTERNAL = {
 
 module.exports = {
   entry: {
-    'awesome-react-rating': path.join(SOURCE_DIR, 'index.js'),
-    'awesome-react-rating.min': path.join(SOURCE_DIR, 'index.js'),
+    'react-rating': path.join(SOURCE_DIR, 'index.js'),
+    'react-rating.min': path.join(SOURCE_DIR, 'index.js'),
   },
   externals: {
     react: REACT_EXTERNAL,
@@ -33,7 +33,7 @@ module.exports = {
     path: DIST_DIR,
     publicPath: '/',
     libraryTarget: 'umd',
-    library: 'AwesomeReactRating',
+    library: 'ReactRating',
   },
   plugins: [
     new webpack.DefinePlugin({

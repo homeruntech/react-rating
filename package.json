@@ -1,8 +1,8 @@
 {
-  "name": "@prontopro/awesome-react-rating",
-  "version": "0.1.33",
-  "description": "An awesome React Rating component",
-  "main": "dist/awesome-react-rating.js",
+  "name": "@prontopro/react-rating",
+  "version": "0.0.0",
+  "description": "An React Rating component",
+  "main": "dist/react-rating.js",
   "files": [
     "README.md",
     "LICENSE.md",
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ProntoPro/awesome-react-rating.git"
+    "url": "git+https://github.com/ProntoPro/react-rating.git"
   },
   "moduleRoots": [
     "",
@@ -26,9 +26,9 @@
   "author": "ProntoPro",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ProntoPro/awesome-react-rating/issues"
+    "url": "https://github.com/ProntoPro/react-rating/issues"
   },
-  "homepage": "https://github.com/ProntoPro/awesome-react-rating",
+  "homepage": "https://github.com/ProntoPro/react-rating",
   "jest": {
     "coverageReporters": [
       "text-summary",
@@ -97,5 +97,8 @@
     "test:watch": "yarn test --watch",
     "test": "jest test --coverage --env=jsdom",
     "version": "yarn build && git add -A dist"
+  },
+  "directories": {
+    "doc": "docs"
   }
 }

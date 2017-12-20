@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ProntoPro/awesome-react-rating.svg?branch=master)](https://travis-ci.org/ProntoPro/awesome-react-rating)
+[![Build Status](https://travis-ci.org/ProntoPro/react-rating.svg?branch=master)](https://travis-ci.org/ProntoPro/react-rating)
 
 # React Rating
 
@@ -6,21 +6,21 @@ React Rating is a [react](https://github.com/facebook/react) rating component bu
 
 ## Installation
 
-You can install `awesome-react-rating` component using the *yarn* package manager:
+You can install `react-rating` component using the *yarn* package manager:
 
 ```bash
-yarn add --save @prontopro/awesome-react-rating
+yarn add --save @prontopro/react-rating
 ```
 
 or *npm*:
 
 ```bash
-npm install --save @prontopro/awesome-react-rating
+npm install --save @prontopro/react-rating
 ```
 
 ### Dependencies
 
-The `awesome-react-rating` component [peer depends](https://docs.npmjs.com/files/package.json#peerdependencies) on the [React](http://facebook.github.io/react/) library.
+The `react-rating` component [peer depends](https://docs.npmjs.com/files/package.json#peerdependencies) on the [React](http://facebook.github.io/react/) library.
 
 You can install React using *yarn* or *npm* too:
 
@@ -33,7 +33,7 @@ yarn add --save react
 1. Import Rating Component
 
     ```javascript
-    import Rating from '@prontopro/awesome-react-rating'
+    import Rating from '@prontopro/react-rating'
     ```
 
 2. Start using it
@@ -68,4 +68,4 @@ Callback      | Type                           | Description
 
 ## License
 
-[MIT License](https://github.com/ProntoPro/awesome-react-rating/blob/master/LICENSE.md)
+[MIT License](https://github.com/ProntoPro/react-rating/blob/master/LICENSE.md)
