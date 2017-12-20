@@ -2,30 +2,24 @@
 
 # React Rating
 
-React Rating is a [react](https://github.com/facebook/react) rating component built with `styled-components` [StyledComponent](https://github.com/styled-components/styled-components) 💅  and inspired by [ReactRating](https://github.com/dreyescat/react-rating/)
+React Rating is a [React](https://github.com/facebook/react) Rating component built with `styled-components` [StyledComponents](https://github.com/styled-components/styled-components) 💅  and inspired by [ReactRating](https://github.com/dreyescat/react-rating/)
 
 ## Installation
 
-You can install `react-rating` component using the *yarn* package manager:
+You can install `@prontopro/react-ratingreact-rating` component using the **yarn** package manager:
 
 ```bash
 yarn add --save @prontopro/react-rating
 ```
 
-or *npm*:
-
-```bash
-npm install --save @prontopro/react-rating
-```
-
 ### Dependencies
 
-The `react-rating` component [peer depends](https://docs.npmjs.com/files/package.json#peerdependencies) on the [React](http://facebook.github.io/react/) library.
+The `@prontopro/react-rating` component [peer depends](https://docs.npmjs.com/files/package.json#peerdependencies) on the [React](http://facebook.github.io/react/) library.
 
-You can install React using *yarn* or *npm* too:
+You can install React using *yarn*:
 
 ```bash
-yarn add --save react
+yarn add --save react react-dom
 ```
 
 ## Usage
@@ -36,9 +30,7 @@ yarn add --save react
     import Rating from '@prontopro/react-rating'
     ```
 
-2. Start using it
-
-    Or with JSX:
+2. Start using it:
 
     ```jsx
     <Rating />
