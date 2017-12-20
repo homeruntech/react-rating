@@ -1,10 +1,9 @@
-// @flow
 import { options } from '../constants'
 
-export const getClientX = (event: Object): number =>
+export const getClientX = event =>
   (event.touches && event.touches[0] ? event.touches[0].clientX : event.clientX)
 
-export const getFractionValue = (index: number, fractions: number): number => {
+export const getFractionValue = (index, fractions) => {
   const fraction = Math.ceil((index % 1) * fractions) / fractions
 
   return Math.floor(index) + (Math.floor(fraction * options.PRECISION) / options.PRECISION)
@@ -12,9 +11,9 @@ export const getFractionValue = (index: number, fractions: number): number => {
 
 export const noop = () => {}
 
-export const range = (length: number, map: Function = (_, i) => `${i}`): string[] => Array.from({ length }, map)
+export const range = (length, map = (_, i) => `${i}`) => Array.from({ length }, map)
 
-export const validateParams = ({ start, step, stop }: { start: number, step: number, stop: number }): boolean => {
+export const validateParams = ({ start, step, stop }) => {
   if (!Number.isInteger(start)) {
     throw new Error('"start" must be an integer.')
   }

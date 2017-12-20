@@ -1,11 +1,11 @@
 {
   "presets": [
     "env",
-    "flow",
+    "react",
+    "stage-2"
   ],
   "plugins": [
     "inline-import-data-uri",
-    "transform-object-rest-spread",
-    "transform-react-jsx"
-  ],
+    "add-module-exports"
+  ]
 }

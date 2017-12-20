@@ -2,7 +2,7 @@
   "name": "@prontopro/awesome-react-rating",
   "version": "0.1.32",
   "description": "An awesome React Rating component",
-  "main": "dist/index.js",
+  "main": "dist/awesome-react-rating.js",
   "files": [
     "README.md",
     "LICENSE.md",
@@ -45,49 +45,53 @@
         "lines": 72,
         "statements": 72
       }
-    }
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/.config/jest.js"
   },
   "peerDependencies": {
-    "react": ">=16.0.0"
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0",
+    "react-tap-event-plugin": ">=3.0.0",
+    "styled-components": ">=2.2.0"
   },
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^8.0.1",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-inline-import-data-uri": "^1.0.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.5.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-flow": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
-    "enzyme": "^3.1.0",
-    "enzyme-adapter-react-16": "^1.0.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.8.0",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-flowtype": "^2.37.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-config-prettier": "^2.6.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.4.0",
-    "eslint-watch": "^3.1.3",
-    "flow-bin": "^0.61.0",
-    "react-addons-test-utils": "^15.6.2",
-    "react-scripts": "^1.0.17",
-    "react-test-renderer": "^16.0.0",
-    "webpack": "^3.10.0",
-    "babel-polyfill": "^6.26.0",
-    "prop-types": "^15.6.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "jest": "^22.0.3",
+    "jest-enzyme": "^4.0.1",
+    "uglify-js": "^3.1.1",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
+  },
+  "dependencies": {
+    "prop-types": "^15.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-tap-event-plugin": "^3.0.2",
     "styled-components": "^2.2.1"
   },
-  "dependencies": {},
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config .config/webpack.dist.config.js",
     "eslint:watch": "esw -w --clear --cache ./src",
     "eslint": "clear && eslint ./src && echo \"No errors found.\"",
-    "start": "react-scripts start",
-    "test:ci": "yarn test --colors --lastCommit --runInBand --silent",
+    "start": "webpack-dev-server --config .config/webpack.config.js --inline --host 127.0.0.1 --content-base ../examples/",
+    "test:ci": "yarn test --colors --lastCommit --silent",
     "test:watch": "yarn test --watch",
-    "test": "react-scripts test --coverage --env=jsdom"
+    "test": "jest test --coverage --env=jsdom"
   }
 }
