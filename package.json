@@ -25,11 +25,21 @@
     "styled-components"
   ],
   "author": "ProntoPro",
-  "contributors": [{
-    "name": "Filippo Sarzana",
-    "email": "filippo@sarzana.me",
-    "url": "https://github.com/filipposarzana"
-  }],
+  "contributors": [
+    {
+      "name": "David Sorrentino",
+      "email": "me@davidsorrentino.com",
+      "url": "https://github.com/dapids"
+    }, {
+      "name": "Filippo Sarzana",
+      "email": "filippo@sarzana.me",
+      "url": "https://github.com/filipposarzana"
+    }, {
+      "name": "Paolo Rovella",
+      "email": "paolo.rovella@gmail.com",
+      "url": "https://github.com/paolorovella"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ProntoPro/react-rating/issues"
