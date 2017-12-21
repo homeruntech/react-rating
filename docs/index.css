@@ -27,11 +27,26 @@ a {
   text-decoration: none;
 }
 
+img {
+  max-width: 100%;
+}
+
 .fork-me-on-github {
   display: block;
   position: fixed;
-  right: 0;
-  top: 0;
+  right: 8px;
+  top: 8px;
+  width: 32px;
+  height: 32px;
+  opacity: .6;
+  transition: opacity .3s;
+  will-change: opacity;
+}
+
+.fork-me-on-github:active,
+.fork-me-on-github:focus,
+.fork-me-on-github:hover {
+  opacity: 1;
 }
 
 .row {
