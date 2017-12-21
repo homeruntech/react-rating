@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/ProntoPro/react-rating.svg?branch=master)](https://travis-ci.org/ProntoPro/react-rating)
+[![Build Status](https://travis-ci.org/ProntoPro/react-rating.svg?branch=master)](https://travis-ci.org/ProntoPro/react-rating) [![NPM version](https://badge.fury.io/js/%40prontopro%2Freact-rating.svg)](https://www.npmjs.com/package/@prontopro/react-rating)  [![Dependency Status](https://david-dm.org/@prontopro/react-rating.svg)](https://www.npmjs.com/package/@prontopro/react-rating)
+[![devDependency Status](https://david-dm.org/@prontopro/react-rating/dev-status.svg)](https://www.npmjs.com/package/@prontopro/react-rating) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/ProntoPro/react-rating/pulls) [![Open Source Love](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://github.com/ProntoPro/react-rating)
 
 # React Rating
 
