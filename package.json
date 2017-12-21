@@ -92,6 +92,7 @@
     "html-webpack-plugin": "^2.30.1",
     "jest": "^22.0.3",
     "jest-enzyme": "^4.0.1",
+    "open-browser-webpack-plugin": "^0.0.5",
     "uglify-js": "^3.1.1",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.8.2"
@@ -105,14 +106,15 @@
   },
   "scripts": {
     "build": "webpack --config .config/webpack.dist.config.js",
+    "docs": "webpack --config .config/webpack.config.js",
     "eslint": "clear && eslint ./ && echo \"No errors found.\"",
     "eslint:watch": "esw -w --clear --cache ./",
     "postversion": "git push && git push --tags",
-    "start": "webpack-dev-server --config .config/webpack.config.js --inline --host 127.0.0.1 --content-base .examples/",
+    "start": "webpack-dev-server --config .config/webpack.config.js --host 127.0.0.1 --content-base docs/",
     "test:ci": "yarn test --colors --lastCommit --silent",
     "test:watch": "yarn test --watch",
     "test": "jest test --coverage --env=jsdom",
-    "version": "yarn build && git add -A dist"
+    "version": "yarn build && yarn docs && git add -A dist"
   },
   "directories": {
     "doc": "docs"
