@@ -22,7 +22,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.join(DOCS_DIR),
-    publicPath: '/',
+    publicPath: './',
   },
   module: {
     rules: [{
