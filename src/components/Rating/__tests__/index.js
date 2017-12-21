@@ -1,10 +1,9 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import Rate from '../../Rate'
 import Rating from '..'
 
 const setupMount = props => mount(<Rating {...props} />)
-const setupShallow = props => shallow(<Rating {...props} />)
 
 describe('Rating', () => {
   it('renders without crashing', () => {
@@ -32,11 +31,10 @@ describe('Rating', () => {
 
     const RateStars = component.find(Rate)
 
-    RateStars.forEach(RateStar => {
+    RateStars.forEach((RateStar) => {
       RateStar.simulate('click')
       RateStar.simulate('mouseEnter')
       RateStar.simulate('mouseMove')
     })
-
   })
 })

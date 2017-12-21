@@ -11,7 +11,7 @@ class Rate extends PureComponent {
     }
   }
 
-  handleClick = (event) => this.props.onClick(event, this.props.index)
+  handleClick = event => this.props.onClick(event, this.props.index)
 
   render() {
     const { emptyRate, fixedPercentage, fullRate, hoverPercentage, readonly } = this.props

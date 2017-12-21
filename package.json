@@ -108,7 +108,7 @@
     "build": "webpack --config .config/webpack.dist.config.js",
     "docs": "webpack --config .config/webpack.config.js",
     "eslint": "clear && eslint ./ && echo \"No errors found.\"",
-    "eslint:watch": "esw -w --clear --cache ./",
+    "eslint:watch": "esw -w --clear --cache",
     "postversion": "git push && git push --tags",
     "start": "webpack-dev-server --config .config/webpack.config.js --host 127.0.0.1 --content-base docs/",
     "test:ci": "yarn test --colors --lastCommit --silent",

@@ -103,9 +103,9 @@ class Rating extends PureComponent {
     return start + (Math.floor(index) * step) + (step * this.round(index % 1))
   }
 
-  propsAreChanged = ({ initialRate, start, stop }) => {
-    return initialRate !== this.props.initialRate || start !== this.props.start || stop !== this.props.stop
-  }
+  propsAreChanged = ({ initialRate, start, stop }) => initialRate !== this.props.initialRate
+    || start !== this.props.start
+    || stop !== this.props.stop
 
   round = (index) => {
     const { fractions, stop } = this.props

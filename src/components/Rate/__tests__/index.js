@@ -43,6 +43,6 @@ describe('Rate', () => {
   })
 
   it('should color stars if hoverPercentage greater than fixedPercentage', () => {
-    const component = setupMount({ fixedPercentage: 50, hoverPercentage: 100, readonly: false })
+    setupMount({ fixedPercentage: 50, hoverPercentage: 100, readonly: false })
   })
 })
