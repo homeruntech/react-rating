@@ -56,10 +56,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 73,
-        "functions": 75,
-        "lines": 72,
-        "statements": 72
+        "branches": 90,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
       }
     },
     "setupTestFrameworkScriptFile": "<rootDir>/.config/jest.js"

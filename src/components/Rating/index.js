@@ -21,13 +21,6 @@ class Rating extends PureComponent {
 
     validateParams(props)
 
-    this.getPercentage = this.getPercentage.bind(this)
-    this.getRating = this.getRating.bind(this)
-    this.handleClick = this.handleClick.bind(this)
-    this.handleMouseLeave = this.handleMouseLeave.bind(this)
-    this.handleMouseMove = this.handleMouseMove.bind(this)
-    this.propsAreChanged = this.propsAreChanged.bind(this)
-
     this.state = {
       [ratingTypes.FIXED]: this.getRating(),
       elements: range((stop - start), (_, i) => `react-rating-${i}`),
@@ -42,13 +35,13 @@ class Rating extends PureComponent {
     }
   }
 
-  getFractionRoundedValue(event) {
+  getFractionRoundedValue = (event) => {
     const x = getClientX(event) - event.currentTarget.getBoundingClientRect().left
 
     return this.round(x / event.currentTarget.offsetWidth)
   }
 
-  getPercentage(index, ratingType) {
+  getPercentage = (index, ratingType) => {
     const currentRatingValue = this.state[ratingType]
     const currentRoundedRatingValue = Math.floor(currentRatingValue)
 
@@ -59,13 +52,13 @@ class Rating extends PureComponent {
     return index - currentRoundedRatingValue < 0 ? 100 : 0
   }
 
-  getRating() {
+  getRating = () => {
     const { initialRate, start, step } = this.props
 
     return (initialRate - start) / step || 0
   }
 
-  handleClick(event, index) {
+  handleClick = (event, index) => {
     const { onClick, onChange } = this.props
     const { currentRating } = this.state
 
@@ -83,13 +76,13 @@ class Rating extends PureComponent {
     }
   }
 
-  handleMouseLeave() {
+  handleMouseLeave = () => {
     this.setState({
       [ratingTypes.HOVER]: 0,
     })
   }
 
-  handleMouseMove(event, index) {
+  handleMouseMove = (event, index) => {
     const { onRate } = this.props
     const { currentRatingHover } = this.state
 
@@ -104,17 +97,17 @@ class Rating extends PureComponent {
     }
   }
 
-  indexToRate(index) {
+  indexToRate = (index) => {
     const { start, step } = this.props
 
     return start + (Math.floor(index) * step) + (step * this.round(index % 1))
   }
 
-  propsAreChanged({ initialRate, start, stop }) {
+  propsAreChanged = ({ initialRate, start, stop }) => {
     return initialRate !== this.props.initialRate || start !== this.props.start || stop !== this.props.stop
   }
 
-  round(index) {
+  round = (index) => {
     const { fractions, stop } = this.props
     const value = getFractionValue(index, fractions)
 
