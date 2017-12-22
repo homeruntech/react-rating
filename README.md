@@ -7,7 +7,7 @@ React Rating is a [React](https://github.com/facebook/react) Rating component bu
 
 ## Installation
 
-You can install `@prontopro/react-ratingreact-rating` component using the **yarn** package manager:
+You can install `@prontopro/react-rating` component using the **yarn** package manager:
 
 ```bash
 yarn add --save @prontopro/react-rating
@@ -25,39 +25,51 @@ yarn add --save react react-dom
 
 ## Usage
 
-1. Import Rating Component
+Import Rating Component
 
-    ```javascript
-    import Rating from '@prontopro/react-rating'
-    ```
+```javascript
+import Rating from '@prontopro/react-rating'
+```
 
-2. Start using it:
+Start using it:
 
-    ```jsx
-    <Rating />
-    ```
+```jsx
+<Rating />
+```
+
+Or passing some props:
+
+```jsx
+<Rating
+  animateOnHover
+  disableAnimation
+  initialRate={3}
+  stop={10}
+/>
+```
 
 ## Properties
 
-Property          | Type                                           | Default              | Description
----               | ---                                            | ---                  | ---
-`start`           | *Number*                                       | 0                    | Range starting value.
-`stop`            | *Number*                                       | 5                    | Range stop value.
-`step`            | *Number*                                       | 1                    | Step increment (must be between *start* and *stop*).
-`initialRate`     | *Number*                                       | 0                    | Initial rate value.
-`emptyRate`       | *React Element*                                | Empty Star           | React Element
-`fullRate`        | *React Element*                                | Full Star            | React element
-`readonly`        | *Boolean*                                      | false                | Whether the rating can be modified or not.
-`animateOnHover`  | *Boolean*                                      | false                | Whether to animate rate hovering or not.
-`fractions`       | *Number*                                       | 1                    | Number of equal parts that make up a whole symbol.
+Property            | Type                         | Default              | Description
+---                 | ---                          | ---                  | ---
+`animateOnHover`    | *Boolean*                    | false                | Whether to animate rate hovering or not.
+`disableAnimation`  | *Boolean*                    | false                | Disable stars animation onClick or onHover.
+`emptyRate`         | *React Element*              | Empty Star           | React Element
+`fractions`         | *Number*                     | 1                    | Number of equal parts that make up a whole symbol.
+`fullRate`          | *React Element*              | Full Star            | React element
+`initialRate`       | *Number*                     | 0                    | Initial rate value.
+`readonly`          | *Boolean*                    | false                | Whether the rating can be modified or not.
+`start`             | *Number*                     | 0                    | Range starting value.
+`step`              | *Number*                     | 1                    | Step increment (must be between *start* and *stop*).
+`stop`              | *Number*                     | 5                    | Range stop value.
 
 ## Callbacks
 
-Callback      | Type                           | Description
----           | ---                            | ---
-`onChange`    | rate => {}                     | Called when the selected rate is changed.
-`onClick`     | (rate, event) => {}            | Called when a rate is clicked.
-`onRate`      | rate => {}                     | Called when a rate is entered or left. When a rate is left it is called with `undefined`.
+Callback            | Type                         | Parameters                   | Description
+---                 | ---                          | ---                              | ---
+`onChange`          | *Function*                   | rate: *Number*                   | Called when the selected rate is changed.
+`onClick`           | *Function*                   | (rate: *Number*, event: *Event*) | Called when a rate is clicked.
+`onRate`            | *Function*                   | rate: *Number* or *undefined*    | Called when a rate is entered or left. When a rate is left it is called with `undefined`.
 
 ## License
 

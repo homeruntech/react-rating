@@ -115,7 +115,7 @@ class Rating extends PureComponent {
   }
 
   render() {
-    const { animateOnHover, emptyRate, fullRate, readonly } = this.props
+    const { animateOnHover, disableAnimation, emptyRate, fullRate, readonly } = this.props
     const { elements } = this.state
 
     return (
@@ -123,6 +123,7 @@ class Rating extends PureComponent {
         {elements.map((element, index) => (
           <Rate
             animateOnHover={animateOnHover}
+            disableAnimation={disableAnimation}
             key={element}
             emptyRate={emptyRate}
             index={index}
@@ -143,6 +144,7 @@ class Rating extends PureComponent {
 
 Rating.defaultProps = {
   animateOnHover: options.ANIMATE_ON_HOVER,
+  disableAnimation: options.DISABLE_ANIMATION,
   emptyRate: <img alt="" className="emptyRate" src={starEmpty} />,
   fractions: options.FRACTIONS,
   fullRate: <img alt="" className="fullRate" src={starFull} />,
@@ -158,6 +160,7 @@ Rating.defaultProps = {
 
 Rating.propTypes = {
   animateOnHover: PropTypes.bool,
+  disableAnimation: PropTypes.bool,
   emptyRate: PropTypes.element,
   fractions: PropTypes.number,
   fullRate: PropTypes.element,
