@@ -38,6 +38,7 @@ module.exports = {
       '@prontopro/react-rating': SOURCE_DIR,
     },
   },
+  target: 'node',
   plugins: [
     new webpack.optimize.CommonsChunkPlugin('shared'),
     new webpack.LoaderOptionsPlugin({ debug: true }),
