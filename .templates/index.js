@@ -32,6 +32,10 @@ const App = () => (
       <ReactRating animateOnHover />
     </ReactExample>
     <ReactExample className="row">
+      <Title>Animate onHover with animation disabled</Title>
+      <ReactRating animateOnHover disableAnimation />
+    </ReactExample>
+    <ReactExample className="row">
       <Title>ReadOnly</Title>
       <ReactRating readonly />
     </ReactExample>

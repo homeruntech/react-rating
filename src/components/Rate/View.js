@@ -15,13 +15,14 @@ const Icon = styled.span`
   overflow: hidden;
   position: absolute;
   top: 0;
-  transition: width .1s ease-out;
+  ${({ disableAnimation }) => (!disableAnimation ? 'transition: width .1s ease-out;' : '')}
   width: ${({ fixedPercentage, hoverPercentage }) =>
     `${(hoverPercentage > fixedPercentage ? hoverPercentage : fixedPercentage)}%`};
   will-change: width;
 `
 
 const View = ({
+  disableAnimation,
   emptyRate,
   fixedPercentage,
   fullRate,
@@ -38,11 +39,18 @@ const View = ({
     readonly={readonly}
   >
     {emptyRate}
-    <Icon fixedPercentage={fixedPercentage} hoverPercentage={hoverPercentage}>{fullRate}</Icon>
+    <Icon
+      disableAnimation={disableAnimation}
+      fixedPercentage={fixedPercentage}
+      hoverPercentage={hoverPercentage}
+    >
+      {fullRate}
+    </Icon>
   </Item>
 )
 
 View.propTypes = {
+  disableAnimation: PropTypes.bool.isRequired,
   emptyRate: PropTypes.node.isRequired,
   fixedPercentage: PropTypes.number.isRequired,
   fullRate: PropTypes.node.isRequired,

@@ -4,6 +4,7 @@ import Rate from '..'
 
 const defaultProps = {
   animateOnHover: true,
+  disableAnimation: false,
   emptyRate: <div />,
   fullRate: <div />,
   index: 2,
@@ -33,7 +34,7 @@ describe('Rate', () => {
   })
 
   it('should not call onMouseMove if animateOnHover is disabled', () => {
-    const component = setupMount({ animateOnHover: false, readonly: false })
+    const component = setupMount({ animateOnHover: false, disableAnimation: true, readonly: false })
 
     component.simulate('click')
     component.simulate('mouseEnter')

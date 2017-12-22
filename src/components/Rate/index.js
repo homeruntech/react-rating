@@ -14,10 +14,11 @@ class Rate extends PureComponent {
   handleClick = event => this.props.onClick(event, this.props.index)
 
   render() {
-    const { emptyRate, fixedPercentage, fullRate, hoverPercentage, readonly } = this.props
+    const { disableAnimation, emptyRate, fixedPercentage, fullRate, hoverPercentage, readonly } = this.props
 
     return (
       <View
+        disableAnimation={disableAnimation}
         emptyRate={emptyRate}
         fixedPercentage={fixedPercentage}
         fullRate={fullRate}
@@ -39,6 +40,7 @@ Rate.defaultProps = {
 
 Rate.propTypes = {
   animateOnHover: PropTypes.bool.isRequired,
+  disableAnimation: PropTypes.bool.isRequired,
   emptyRate: PropTypes.node.isRequired,
   index: PropTypes.number.isRequired,
   fixedPercentage: PropTypes.number,

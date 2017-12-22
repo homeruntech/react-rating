@@ -107,6 +107,7 @@ var _utils = __webpack_require__(4);
 
 var options = exports.options = {
   ANIMATE_ON_HOVER: false,
+  DISABLE_ANIMATION: false,
   FRACTIONS: 1,
   INITIAL_RATE: 0,
   ON_CHANGE: _utils.noop,
@@ -313,6 +314,7 @@ var Rating = function (_PureComponent) {
 
       var _props = this.props,
           animateOnHover = _props.animateOnHover,
+          disableAnimation = _props.disableAnimation,
           emptyRate = _props.emptyRate,
           fullRate = _props.fullRate,
           readonly = _props.readonly;
@@ -325,6 +327,7 @@ var Rating = function (_PureComponent) {
         elements.map(function (element, index) {
           return _react2.default.createElement(_Rate2.default, {
             animateOnHover: animateOnHover,
+            disableAnimation: disableAnimation,
             key: element,
             emptyRate: emptyRate,
             index: index,
@@ -442,6 +445,7 @@ var _initialiseProps = function _initialiseProps() {
 
 Rating.defaultProps = {
   animateOnHover: _constants.options.ANIMATE_ON_HOVER,
+  disableAnimation: _constants.options.DISABLE_ANIMATION,
   emptyRate: _react2.default.createElement('img', { alt: '', className: 'emptyRate', src: starEmpty }),
   fractions: _constants.options.FRACTIONS,
   fullRate: _react2.default.createElement('img', { alt: '', className: 'fullRate', src: starFull }),
@@ -524,6 +528,7 @@ var Rate = function (_PureComponent) {
     key: 'render',
     value: function render() {
       var _props = this.props,
+          disableAnimation = _props.disableAnimation,
           emptyRate = _props.emptyRate,
           fixedPercentage = _props.fixedPercentage,
           fullRate = _props.fullRate,
@@ -532,6 +537,7 @@ var Rate = function (_PureComponent) {
 
 
       return _react2.default.createElement(_View2.default, {
+        disableAnimation: disableAnimation,
         emptyRate: emptyRate,
         fixedPercentage: fixedPercentage,
         fullRate: fullRate,
@@ -568,7 +574,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _templateObject = _taggedTemplateLiteral(['\n  display: block;\n  position: relative;\n  ', '\n'], ['\n  display: block;\n  position: relative;\n  ', '\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  display: block;\n  height: 100%;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  transition: width .1s ease-out;\n  width: ', ';\n  will-change: width;\n'], ['\n  display: block;\n  height: 100%;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  transition: width .1s ease-out;\n  width: ', ';\n  will-change: width;\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n  display: block;\n  height: 100%;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  ', '\n  width: ', ';\n  will-change: width;\n'], ['\n  display: block;\n  height: 100%;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  ', '\n  width: ', ';\n  will-change: width;\n']);
 
 var _react = __webpack_require__(0);
 
@@ -592,19 +598,23 @@ var Item = _styledComponents2.default.a(_templateObject, function (_ref) {
 });
 
 var Icon = _styledComponents2.default.span(_templateObject2, function (_ref2) {
-  var fixedPercentage = _ref2.fixedPercentage,
-      hoverPercentage = _ref2.hoverPercentage;
+  var disableAnimation = _ref2.disableAnimation;
+  return !disableAnimation ? 'transition: width .1s ease-out;' : '';
+}, function (_ref3) {
+  var fixedPercentage = _ref3.fixedPercentage,
+      hoverPercentage = _ref3.hoverPercentage;
   return (hoverPercentage > fixedPercentage ? hoverPercentage : fixedPercentage) + '%';
 });
 
-var View = function View(_ref3) {
-  var emptyRate = _ref3.emptyRate,
-      fixedPercentage = _ref3.fixedPercentage,
-      fullRate = _ref3.fullRate,
-      hoverPercentage = _ref3.hoverPercentage,
-      onClick = _ref3.onClick,
-      onMouseMove = _ref3.onMouseMove,
-      readonly = _ref3.readonly;
+var View = function View(_ref4) {
+  var disableAnimation = _ref4.disableAnimation,
+      emptyRate = _ref4.emptyRate,
+      fixedPercentage = _ref4.fixedPercentage,
+      fullRate = _ref4.fullRate,
+      hoverPercentage = _ref4.hoverPercentage,
+      onClick = _ref4.onClick,
+      onMouseMove = _ref4.onMouseMove,
+      readonly = _ref4.readonly;
   return _react2.default.createElement(
     Item,
     {
@@ -617,7 +627,11 @@ var View = function View(_ref3) {
     emptyRate,
     _react2.default.createElement(
       Icon,
-      { fixedPercentage: fixedPercentage, hoverPercentage: hoverPercentage },
+      {
+        disableAnimation: disableAnimation,
+        fixedPercentage: fixedPercentage,
+        hoverPercentage: hoverPercentage
+      },
       fullRate
     )
   );
