@@ -5,7 +5,8 @@
     "stage-2"
   ],
   "plugins": [
+    "add-module-exports",
     "inline-import-data-uri",
-    "add-module-exports"
+    "transform-react-remove-prop-types"
   ]
 }

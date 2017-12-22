@@ -2,7 +2,7 @@
   "name": "@prontopro/react-rating",
   "version": "0.1.0",
   "description": "React-based rating component empowered by styled-components",
-  "main": "dist/react-rating.js",
+  "main": "dist/react-rating.min.js",
   "files": [
     "README.md",
     "LICENSE.md",
@@ -30,11 +30,13 @@
       "name": "David Sorrentino",
       "email": "me@davidsorrentino.com",
       "url": "https://github.com/dapids"
-    }, {
+    },
+    {
       "name": "Filippo Sarzana",
       "email": "filippo@sarzana.me",
       "url": "https://github.com/filipposarzana"
-    }, {
+    },
+    {
       "name": "Paolo Rovella",
       "email": "paolo.rovella@gmail.com",
       "url": "https://github.com/paolorovella"
@@ -45,6 +47,16 @@
     "url": "https://github.com/ProntoPro/react-rating/issues"
   },
   "homepage": "https://github.com/ProntoPro/react-rating",
+  "bundlesize": [
+    {
+      "path": "./dist/react-rating.js",
+      "maxSize": "10 kB"
+    },
+    {
+      "path": "./dist/react-rating.min.js",
+      "maxSize": "5 kB"
+    }
+  ],
   "jest": {
     "coverageReporters": [
       "text-summary",
@@ -77,9 +89,11 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-inline-import-data-uri": "^1.0.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.12",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "bundlesize": "^0.15.3",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.8.0",
@@ -106,6 +120,7 @@
   },
   "scripts": {
     "build": "webpack --config .config/webpack.dist.config.js",
+    "bundle:check": "bundlesize",
     "docs": "webpack --config .config/webpack.config.js",
     "eslint": "clear && eslint ./ && echo \"No errors found.\"",
     "eslint:watch": "esw -w --clear --cache",

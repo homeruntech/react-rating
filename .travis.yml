@@ -13,3 +13,4 @@ script:
  - yarn eslint
  - yarn test:ci
  - yarn build
+ - yarn bundle:check
