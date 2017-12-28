@@ -57,6 +57,11 @@
       "maxSize": "5 kB"
     }
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn eslint"
+    }
+  },
   "jest": {
     "coverageReporters": [
       "text-summary",
