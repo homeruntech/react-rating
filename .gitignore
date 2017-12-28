@@ -6,6 +6,9 @@
 # build
 /build
 
+# docs
+/docs
+
 # eslint
 .eslintcache
 

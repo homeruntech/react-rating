@@ -14,6 +14,7 @@ stages:
   - build
   - name: npm-release
     if: tag =~ ^v(\d{1}).(\d{1}).(\d{1})$
+  - github-pages
 jobs:
   include:
     - stage: install
@@ -23,6 +24,11 @@ jobs:
       script: yarn eslint
     -
       script: yarn test:ci
+
+    - stage: build
+      script: yarn build
+    -
+      script: yarn docs
     -
       script: yarn bundle:check
 
@@ -30,9 +36,21 @@ jobs:
       node_js: 9
       script: echo "Deploying to npm..."
       deploy:
-        provider: npm
-        email: "filippo@sarzana.me"
         api_key: $NPM_API_KEY
+        email: "filippo@sarzana.me"
         gem: travis-build-stages-demo
+        provider: npm
+        skip_cleanup: true
         on:
           tags: true
+
+    - stage: github-pages
+      node_js: 9
+      script: echo "Deploying Github Pages..."
+      deploy:
+        github_token: $GITHUB_TOKEN
+        provider: pages
+        skip_cleanup: true
+        local_dir: docs
+        on:
+          branch: master
