@@ -67,11 +67,12 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
     new webpack.optimize.UglifyJsPlugin({
-      include: /\.min\.js$/,
-      minimize: true,
       compress: {
         warnings: false,
       },
+      include: /\.min\.js$/,
+      minimize: true,
+      sourceMap: true,
     }),
   ],
 }
