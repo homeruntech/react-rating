@@ -9,19 +9,18 @@ cache:
   - node_modules
 install: true
 stages:
-  - install
-  - eslint-coverage
-  - build
-  - name: npm-release
+  - Install
+  - ESlint / Coverage
+  - name: NPM Release
     if: tag =~ ^v(\d{1}).(\d{1}).(\d{1})$
   - name: github-pages
     if: branch = master
 jobs:
   include:
-    - stage: install
+    - stage: Install
       script: yarn
 
-    - stage: eslint-coverage
+    - stage: ESlint / Coverage
       script: yarn eslint
     -
       script: yarn test:ci
@@ -33,7 +32,7 @@ jobs:
     -
       script: yarn bundle:check
 
-    - stage: npm-release
+    - stage: NPM Release
       node_js: 9
       script: echo "Deploying to npm..."
       deploy:

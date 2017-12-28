@@ -121,14 +121,15 @@
   "scripts": {
     "build": "webpack --config .config/webpack.dist.config.js",
     "bundle:check": "bundlesize",
-    "docs": "mkdir -p docs && cp -r .templates/assets docs && webpack --config .config/webpack.config.js",
+    "dist": "yarn build && yarn docs",
+    "docs": "webpack --config .config/webpack.config.js",
     "eslint": "clear && eslint ./ && echo \"No errors found.\"",
     "eslint:watch": "esw -w --clear --cache",
     "start": "webpack-dev-server --watch --config .config/webpack.config.js --host 127.0.0.1 --content-base docs/",
     "test:ci": "yarn test --colors --lastCommit --silent",
     "test:watch": "yarn test --watch",
     "test": "jest test --coverage --env=jsdom",
-    "version": "echo \"Error: you shall not pass!\" && exit 1"
+    "preversion": "echo \"Error: you shall not pass!\" && exit 1"
   },
   "directories": {
     "doc": "docs"
