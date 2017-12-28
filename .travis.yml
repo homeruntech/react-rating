@@ -14,7 +14,8 @@ stages:
   - build
   - name: npm-release
     if: tag =~ ^v(\d{1}).(\d{1}).(\d{1})$
-  - github-pages
+  - name: github-pages
+    if: branch = master
 jobs:
   include:
     - stage: install
@@ -52,5 +53,3 @@ jobs:
         provider: pages
         skip_cleanup: true
         local_dir: docs
-        on:
-          branch: master
