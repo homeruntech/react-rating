@@ -10,25 +10,20 @@ cache:
 install: true
 stages:
   - Install
-  - ESlint / Coverage
+  - Test
   - name: NPM Release
     if: tag =~ ^v(\d{1}).(\d{1}).(\d{1})$
-  - name: github-pages
+  - name: Github Pages
     if: branch = master
 jobs:
   include:
     - stage: Install
       script: yarn
 
-    - stage: ESlint / Coverage
+    - stage: Test
       script: yarn eslint
     -
       script: yarn test:ci
-
-    - stage: build
-      script: yarn build
-    -
-      script: yarn docs
     -
       script: yarn bundle:check
 
@@ -44,11 +39,11 @@ jobs:
         on:
           tags: true
 
-    - stage: github-pages
+    - stage: Github Pages
       node_js: 9
       script: echo "Deploying Github Pages..."
       deploy:
         github_token: $GITHUB_TOKEN
         provider: pages
         skip_cleanup: true
-        local_dir: docs
+        local_dir: ${TRAVIS_BUILD_DIR}/docs
