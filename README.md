@@ -3,14 +3,14 @@
 
 # React Rating
 
-React Rating is a [React](https://github.com/facebook/react) Rating component built with `styled-components` [StyledComponents](https://github.com/styled-components/styled-components) 💅  and inspired by [ReactRating](https://github.com/dreyescat/react-rating/)
+React Rating is a [React](https://github.com/facebook/react) rating component built with [StyledComponents](https://github.com/styled-components/styled-components) 💅  and inspired by [ReactRating](https://github.com/dreyescat/react-rating/).
 
 ## Installation
 
 You can install `@prontopro/react-rating` component using the **yarn** package manager:
 
 ```bash
-yarn add --save @prontopro/react-rating
+yarn add @prontopro/react-rating
 ```
 
 ### Dependencies
@@ -37,7 +37,7 @@ Start using it:
 <Rating />
 ```
 
-Or passing some props:
+Pass some config props:
 
 ```jsx
 <Rating
