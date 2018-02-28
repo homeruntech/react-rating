@@ -4,6 +4,7 @@ extends:
 plugins:
   - react
 rules:
+  import/no-extraneous-dependencies: 'off'
   object-curly-newline: 'off'
   max-len:
     - error
