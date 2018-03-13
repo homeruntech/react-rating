@@ -1,7 +1,6 @@
 ### Is this a bug report?
 
 
-
 ### Environment
 
 1. `node -v`:
@@ -24,7 +23,6 @@ Then, specify:
 
 
 ### Expected Behavior
-
 
 
 ### Actual Behavior
