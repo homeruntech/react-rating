@@ -3165,8 +3165,11 @@ exports.default = undefined;
 "use strict";
 
 
-var _templateObject = _taggedTemplateLiteral(['\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n'], ['\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  margin-bottom: 8px;\n'], ['\n  margin-bottom: 8px;\n']);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n  background-color: rgba(55,201,217,0.9);\n  border-radius: 4px;\n  border: none;\n  color: #fff;\n  cursor: pointer;\n  margin: 8px 0;\n  outline: none;\n  padding: 8px;\n'], ['\n  background-color: rgba(55,201,217,0.9);\n  border-radius: 4px;\n  border: none;\n  color: #fff;\n  cursor: pointer;\n  margin: 8px 0;\n  outline: none;\n  padding: 8px;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n'], ['\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  margin-bottom: 8px;\n'], ['\n  margin-bottom: 8px;\n']);
 
 var _react = __webpack_require__(2);
 
@@ -3184,70 +3187,131 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var ReactExample = _styledComponents2.default.div(_templateObject);
+var Button = _styledComponents2.default.button(_templateObject);
 
-var Title = _styledComponents2.default.h3(_templateObject2);
+var ReactExample = _styledComponents2.default.div(_templateObject2);
 
-var Wrapper = _styledComponents2.default.div(_templateObject);
+var Title = _styledComponents2.default.h3(_templateObject3);
 
-var App = function App() {
-  return _react2.default.createElement(
-    Wrapper,
-    null,
-    _react2.default.createElement(
-      ReactExample,
-      { className: 'row' },
-      _react2.default.createElement(
-        Title,
+var Wrapper = _styledComponents2.default.div(_templateObject2);
+
+var App = function (_PureComponent) {
+  _inherits(App, _PureComponent);
+
+  function App() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, App);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = App.__proto__ || Object.getPrototypeOf(App)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      initialRate: 0
+    }, _this.handleRate = function () {
+      var initialRate = Math.floor(Math.random() * 5) + 1;
+
+      _this.setState({ initialRate: initialRate });
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(App, [{
+    key: 'render',
+    value: function render() {
+      var initialRate = this.state.initialRate;
+
+
+      return _react2.default.createElement(
+        Wrapper,
         null,
-        'Default'
-      ),
-      _react2.default.createElement(_reactRating2.default, null)
-    ),
-    _react2.default.createElement(
-      ReactExample,
-      { className: 'row' },
-      _react2.default.createElement(
-        Title,
-        null,
-        'Animate onHover'
-      ),
-      _react2.default.createElement(_reactRating2.default, { animateOnHover: true })
-    ),
-    _react2.default.createElement(
-      ReactExample,
-      { className: 'row' },
-      _react2.default.createElement(
-        Title,
-        null,
-        'Animate onHover with animation disabled'
-      ),
-      _react2.default.createElement(_reactRating2.default, { animateOnHover: true, disableAnimation: true })
-    ),
-    _react2.default.createElement(
-      ReactExample,
-      { className: 'row' },
-      _react2.default.createElement(
-        Title,
-        null,
-        'ReadOnly'
-      ),
-      _react2.default.createElement(_reactRating2.default, { readonly: true })
-    ),
-    _react2.default.createElement(
-      ReactExample,
-      { className: 'row' },
-      _react2.default.createElement(
-        Title,
-        null,
-        '10 StarsRating'
-      ),
-      _react2.default.createElement(_reactRating2.default, { animateOnHover: true, stop: 10 })
-    )
-  );
-};
+        _react2.default.createElement(
+          ReactExample,
+          { className: 'row' },
+          _react2.default.createElement(
+            Title,
+            null,
+            'Default'
+          ),
+          _react2.default.createElement(_reactRating2.default, null)
+        ),
+        _react2.default.createElement(
+          ReactExample,
+          { className: 'row' },
+          _react2.default.createElement(
+            Title,
+            null,
+            'Animate onHover'
+          ),
+          _react2.default.createElement(_reactRating2.default, { animateOnHover: true })
+        ),
+        _react2.default.createElement(
+          ReactExample,
+          { className: 'row' },
+          _react2.default.createElement(
+            Title,
+            null,
+            'Animate onHover with animation disabled'
+          ),
+          _react2.default.createElement(_reactRating2.default, { animateOnHover: true, disableAnimation: true })
+        ),
+        _react2.default.createElement(
+          ReactExample,
+          { className: 'row' },
+          _react2.default.createElement(
+            Title,
+            null,
+            'ReadOnly'
+          ),
+          _react2.default.createElement(_reactRating2.default, { readonly: true })
+        ),
+        _react2.default.createElement(
+          ReactExample,
+          { className: 'row' },
+          _react2.default.createElement(
+            Title,
+            null,
+            '10 StarsRating'
+          ),
+          _react2.default.createElement(_reactRating2.default, { animateOnHover: true, stop: 10 })
+        ),
+        _react2.default.createElement(
+          ReactExample,
+          { className: 'row' },
+          _react2.default.createElement(
+            Title,
+            null,
+            'Rating with initialRate'
+          ),
+          _react2.default.createElement(_reactRating2.default, { animateOnHover: true, initialRate: initialRate }),
+          _react2.default.createElement(
+            Button,
+            { onClick: this.handleRate },
+            'Generate random rating'
+          ),
+          _react2.default.createElement(
+            Title,
+            null,
+            'Current rating: ',
+            initialRate
+          )
+        )
+      );
+    }
+  }]);
+
+  return App;
+}(_react.PureComponent);
 
 (0, _reactDom.render)(_react2.default.createElement(App, null), document.getElementById('root'));
 
@@ -20634,7 +20698,7 @@ var Rating = function (_PureComponent) {
 
     (0, _utils.validateParams)(props);
 
-    _this.state = (_this$state = {}, _defineProperty(_this$state, _constants.ratingTypes.FIXED, _this.getRating()), _defineProperty(_this$state, 'elements', (0, _utils.range)(stop - start, function (_, i) {
+    _this.state = (_this$state = {}, _defineProperty(_this$state, _constants.ratingTypes.FIXED, _this.getRating(props)), _defineProperty(_this$state, 'elements', (0, _utils.range)(stop - start, function (_, i) {
       return 'react-rating-' + i;
     })), _this$state);
     return _this;
@@ -20644,7 +20708,7 @@ var Rating = function (_PureComponent) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (this.propsAreChanged(nextProps)) {
-        this.setState(_defineProperty({}, _constants.ratingTypes.FIXED, this.getRating()));
+        this.setState(_defineProperty({}, _constants.ratingTypes.FIXED, this.getRating(nextProps)));
       }
     }
   }, {
@@ -20708,20 +20772,17 @@ var _initialiseProps = function _initialiseProps() {
     return index - currentRoundedRatingValue < 0 ? 100 : 0;
   };
 
-  this.getRating = function () {
-    var _props2 = _this3.props,
-        initialRate = _props2.initialRate,
-        start = _props2.start,
-        step = _props2.step;
-
-
+  this.getRating = function (_ref2) {
+    var initialRate = _ref2.initialRate,
+        start = _ref2.start,
+        step = _ref2.step;
     return (initialRate - start) / step || 0;
   };
 
   this.handleClick = function (event, index) {
-    var _props3 = _this3.props,
-        onClick = _props3.onClick,
-        onChange = _props3.onChange;
+    var _props2 = _this3.props,
+        onClick = _props2.onClick,
+        onChange = _props2.onChange;
     var currentRating = _this3.state.currentRating;
 
 
@@ -20757,25 +20818,25 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.indexToRate = function (index) {
-    var _props4 = _this3.props,
-        start = _props4.start,
-        step = _props4.step;
+    var _props3 = _this3.props,
+        start = _props3.start,
+        step = _props3.step;
 
 
     return start + Math.floor(index) * step + step * _this3.round(index % 1);
   };
 
-  this.propsAreChanged = function (_ref2) {
-    var initialRate = _ref2.initialRate,
-        start = _ref2.start,
-        stop = _ref2.stop;
+  this.propsAreChanged = function (_ref3) {
+    var initialRate = _ref3.initialRate,
+        start = _ref3.start,
+        stop = _ref3.stop;
     return initialRate !== _this3.props.initialRate || start !== _this3.props.start || stop !== _this3.props.stop;
   };
 
   this.round = function (index) {
-    var _props5 = _this3.props,
-        fractions = _props5.fractions,
-        stop = _props5.stop;
+    var _props4 = _this3.props,
+        fractions = _props4.fractions,
+        stop = _props4.stop;
 
     var value = (0, _utils.getFractionValue)(index, fractions);
 

@@ -1,3 +1,5 @@
+Closes #ISSUE_NUMBER
+
 ### Issue Description
 
 ### What I did

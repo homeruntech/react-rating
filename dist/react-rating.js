@@ -294,7 +294,7 @@ var Rating = function (_PureComponent) {
 
     (0, _utils.validateParams)(props);
 
-    _this.state = (_this$state = {}, _defineProperty(_this$state, _constants.ratingTypes.FIXED, _this.getRating()), _defineProperty(_this$state, 'elements', (0, _utils.range)(stop - start, function (_, i) {
+    _this.state = (_this$state = {}, _defineProperty(_this$state, _constants.ratingTypes.FIXED, _this.getRating(props)), _defineProperty(_this$state, 'elements', (0, _utils.range)(stop - start, function (_, i) {
       return 'react-rating-' + i;
     })), _this$state);
     return _this;
@@ -304,7 +304,7 @@ var Rating = function (_PureComponent) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (this.propsAreChanged(nextProps)) {
-        this.setState(_defineProperty({}, _constants.ratingTypes.FIXED, this.getRating()));
+        this.setState(_defineProperty({}, _constants.ratingTypes.FIXED, this.getRating(nextProps)));
       }
     }
   }, {
@@ -368,20 +368,17 @@ var _initialiseProps = function _initialiseProps() {
     return index - currentRoundedRatingValue < 0 ? 100 : 0;
   };
 
-  this.getRating = function () {
-    var _props2 = _this3.props,
-        initialRate = _props2.initialRate,
-        start = _props2.start,
-        step = _props2.step;
-
-
+  this.getRating = function (_ref2) {
+    var initialRate = _ref2.initialRate,
+        start = _ref2.start,
+        step = _ref2.step;
     return (initialRate - start) / step || 0;
   };
 
   this.handleClick = function (event, index) {
-    var _props3 = _this3.props,
-        onClick = _props3.onClick,
-        onChange = _props3.onChange;
+    var _props2 = _this3.props,
+        onClick = _props2.onClick,
+        onChange = _props2.onChange;
     var currentRating = _this3.state.currentRating;
 
 
@@ -417,25 +414,25 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.indexToRate = function (index) {
-    var _props4 = _this3.props,
-        start = _props4.start,
-        step = _props4.step;
+    var _props3 = _this3.props,
+        start = _props3.start,
+        step = _props3.step;
 
 
     return start + Math.floor(index) * step + step * _this3.round(index % 1);
   };
 
-  this.propsAreChanged = function (_ref2) {
-    var initialRate = _ref2.initialRate,
-        start = _ref2.start,
-        stop = _ref2.stop;
+  this.propsAreChanged = function (_ref3) {
+    var initialRate = _ref3.initialRate,
+        start = _ref3.start,
+        stop = _ref3.stop;
     return initialRate !== _this3.props.initialRate || start !== _this3.props.start || stop !== _this3.props.stop;
   };
 
   this.round = function (index) {
-    var _props5 = _this3.props,
-        fractions = _props5.fractions,
-        stop = _props5.stop;
+    var _props4 = _this3.props,
+        fractions = _props4.fractions,
+        stop = _props4.stop;
 
     var value = (0, _utils.getFractionValue)(index, fractions);
 

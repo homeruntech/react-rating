@@ -22,7 +22,7 @@ class Rating extends PureComponent {
     validateParams(props)
 
     this.state = {
-      [ratingTypes.FIXED]: this.getRating(),
+      [ratingTypes.FIXED]: this.getRating(props),
       elements: range((stop - start), (_, i) => `react-rating-${i}`),
     }
   }
@@ -30,7 +30,7 @@ class Rating extends PureComponent {
   componentWillReceiveProps(nextProps) {
     if (this.propsAreChanged(nextProps)) {
       this.setState({
-        [ratingTypes.FIXED]: this.getRating(),
+        [ratingTypes.FIXED]: this.getRating(nextProps),
       })
     }
   }
@@ -52,11 +52,7 @@ class Rating extends PureComponent {
     return index - currentRoundedRatingValue < 0 ? 100 : 0
   }
 
-  getRating = () => {
-    const { initialRate, start, step } = this.props
-
-    return (initialRate - start) / step || 0
-  }
+  getRating = ({ initialRate, start, step }) => (initialRate - start) / step || 0
 
   handleClick = (event, index) => {
     const { onClick, onChange } = this.props
