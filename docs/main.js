@@ -20741,8 +20741,7 @@ var Rating = function (_PureComponent) {
             readonly: readonly,
             onClick: _this2.handleClick,
             onMouseMove: _this2.handleMouseMove,
-            onTouchMove: _this2.handleMouseMove,
-            onTouchEnd: _this2.handleClick
+            onTouchMove: _this2.handleMouseMove
           });
         })
       );
@@ -23378,7 +23377,6 @@ var Rate = function (_PureComponent) {
         hoverPercentage: hoverPercentage,
         onClick: this.handleClick,
         onMouseMove: this.handleMouseMove,
-        onTouchEnd: this.handleClick,
         onTouchMove: this.handleMouseMove,
         readonly: readonly
       });
@@ -23454,7 +23452,6 @@ var View = function View(_ref4) {
     {
       onClick: onClick,
       onMouseMove: onMouseMove,
-      onTouchEnd: onClick,
       onTouchMove: onMouseMove,
       readonly: readonly
     },

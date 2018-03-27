@@ -130,7 +130,6 @@ class Rating extends PureComponent {
             onClick={this.handleClick}
             onMouseMove={this.handleMouseMove}
             onTouchMove={this.handleMouseMove}
-            onTouchEnd={this.handleClick}
           />
         ))}
       </Wrapper>
