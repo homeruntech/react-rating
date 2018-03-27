@@ -2,14 +2,35 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const Item = styled.a`
+const Item = styled.button`
+  -moz-osx-font-smoothing: inherit;
+  -webkit-font-smoothing: inherit;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
   display: block;
+  line-height: normal;
+  margin: 0;
+  outline: none;
+  padding: 0;
   position: relative;
+  vertical-align: middle;
+  white-space: normal;
+
   ${({ readonly }) => (readonly ? 'pointer-events: none;' : 'cursor: pointer;')}
+
+  &:active,
+  &:hover,
+  &:focus {
+    background-color: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    outline: none;
+  }
 `
 
-const Icon = styled.span`
-  display: block;
+const Icon = styled.div`
   height: 100%;
   left: 0;
   overflow: hidden;
@@ -34,7 +55,6 @@ const View = ({
   <Item
     onClick={onClick}
     onMouseMove={onMouseMove}
-    onTouchEnd={onClick}
     onTouchMove={onMouseMove}
     readonly={readonly}
   >

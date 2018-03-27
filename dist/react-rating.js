@@ -273,7 +273,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var Wrapper = _styledComponents2.default.div(_templateObject, function (_ref) {
   var readonly = _ref.readonly;
-  return readonly ? 'pointer-events: none;' : null;
+  return readonly ? 'pointer-events: none;' : '';
 });
 
 var Rating = function (_PureComponent) {
@@ -337,8 +337,7 @@ var Rating = function (_PureComponent) {
             readonly: readonly,
             onClick: _this2.handleClick,
             onMouseMove: _this2.handleMouseMove,
-            onTouchMove: _this2.handleMouseMove,
-            onTouchEnd: _this2.handleClick
+            onTouchMove: _this2.handleMouseMove
           });
         })
       );
@@ -541,7 +540,6 @@ var Rate = function (_PureComponent) {
         hoverPercentage: hoverPercentage,
         onClick: this.handleClick,
         onMouseMove: this.handleMouseMove,
-        onTouchEnd: this.handleClick,
         onTouchMove: this.handleMouseMove,
         readonly: readonly
       });
@@ -570,8 +568,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  display: block;\n  position: relative;\n  ', '\n'], ['\n  display: block;\n  position: relative;\n  ', '\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  display: block;\n  height: 100%;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  ', '\n  width: ', ';\n  will-change: width;\n'], ['\n  display: block;\n  height: 100%;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  ', '\n  width: ', ';\n  will-change: width;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  -moz-osx-font-smoothing: inherit;\n  -webkit-font-smoothing: inherit;\n  appearance: none;\n  background-color: transparent;\n  border: none;\n  box-shadow: none;\n  display: block;\n  line-height: normal;\n  margin: 0;\n  outline: none;\n  padding: 0;\n  position: relative;\n  vertical-align: middle;\n  white-space: normal;\n\n  ', '\n\n  &:active,\n  &:hover,\n  &:focus {\n    background-color: transparent;\n    box-shadow: none;\n    cursor: pointer;\n    outline: none;\n  }\n'], ['\n  -moz-osx-font-smoothing: inherit;\n  -webkit-font-smoothing: inherit;\n  appearance: none;\n  background-color: transparent;\n  border: none;\n  box-shadow: none;\n  display: block;\n  line-height: normal;\n  margin: 0;\n  outline: none;\n  padding: 0;\n  position: relative;\n  vertical-align: middle;\n  white-space: normal;\n\n  ', '\n\n  &:active,\n  &:hover,\n  &:focus {\n    background-color: transparent;\n    box-shadow: none;\n    cursor: pointer;\n    outline: none;\n  }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  height: 100%;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  ', '\n  width: ', ';\n  will-change: width;\n'], ['\n  height: 100%;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  ', '\n  width: ', ';\n  will-change: width;\n']);
 
 var _react = __webpack_require__(0);
 
@@ -589,12 +587,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Item = _styledComponents2.default.a(_templateObject, function (_ref) {
+var Item = _styledComponents2.default.button(_templateObject, function (_ref) {
   var readonly = _ref.readonly;
   return readonly ? 'pointer-events: none;' : 'cursor: pointer;';
 });
 
-var Icon = _styledComponents2.default.span(_templateObject2, function (_ref2) {
+var Icon = _styledComponents2.default.div(_templateObject2, function (_ref2) {
   var disableAnimation = _ref2.disableAnimation;
   return !disableAnimation ? 'transition: width .1s ease-out;' : '';
 }, function (_ref3) {
@@ -617,7 +615,6 @@ var View = function View(_ref4) {
     {
       onClick: onClick,
       onMouseMove: onMouseMove,
-      onTouchEnd: onClick,
       onTouchMove: onMouseMove,
       readonly: readonly
     },

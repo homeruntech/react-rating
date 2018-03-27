@@ -10,7 +10,7 @@ import starFull from '../../assets/star_full.png'
 const Wrapper = styled.div`
   display: flex;
   flex: 1 0 auto;
-  ${({ readonly }) => (readonly ? 'pointer-events: none;' : null)}
+  ${({ readonly }) => (readonly ? 'pointer-events: none;' : '')}
 `
 
 class Rating extends PureComponent {
@@ -130,7 +130,6 @@ class Rating extends PureComponent {
             onClick={this.handleClick}
             onMouseMove={this.handleMouseMove}
             onTouchMove={this.handleMouseMove}
-            onTouchEnd={this.handleClick}
           />
         ))}
       </Wrapper>

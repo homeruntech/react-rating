@@ -25,7 +25,6 @@ class Rate extends PureComponent {
         hoverPercentage={hoverPercentage}
         onClick={this.handleClick}
         onMouseMove={this.handleMouseMove}
-        onTouchEnd={this.handleClick}
         onTouchMove={this.handleMouseMove}
         readonly={readonly}
       />
