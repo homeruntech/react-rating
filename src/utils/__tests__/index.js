@@ -1,3 +1,4 @@
+import expect from 'expect'
 import { getClientX, getFractionValue, noop, range, validateParams } from '..'
 
 describe('getClientX', () => {
@@ -83,7 +84,7 @@ describe('getFractionValue', () => {
 
 describe('noop', () => {
   it('should return undefined', () => {
-    expect(noop()).toBeUndefined()
+    expect(noop()).toBe(undefined)
   })
 })
 
@@ -98,16 +99,15 @@ describe('range', () => {
 
 describe('validateParams', () => {
   it('should throw exception if params does not satisfy constraints', () => {
-    expect(() => validateParams({ start: 'foo', step: 1, stop: 5 })).toThrowError('"start" must be an integer.')
-    expect(() => validateParams({ start: -1, step: 1, stop: 5 })).toThrowError('"start" must be greater than zero.')
-    expect(() => validateParams({ start: 0, step: 'foo', stop: 5 })).toThrowError('"step" must be an integer.')
-    expect(() => validateParams({ start: 0, step: -1, stop: 5 })).toThrowError('"step" must be greater than zero.')
-    expect(() => validateParams({ start: 0, step: 1, stop: 'foo' })).toThrowError('"stop" must be an integer.')
-    expect(() => validateParams({ start: 0, step: 1, stop: -1 })).toThrowError('"stop" must be greater than zero.')
-    expect(() => validateParams({ start: 0, step: 1, stop: 0 })).toThrowError('"stop" must be greater than zero.')
-    expect(() => validateParams({ start: 5, step: 1, stop: 2 })).toThrowError('"start" must be lower than "stop".')
-    expect(() => validateParams({ start: 2, step: 3, stop: 4 }))
-      .toThrowError('"step" must be lower than "(stop - start)".')
-    expect(() => validateParams({ start: 0, step: 1, stop: 5 })).not.toThrow()
+    expect(() => validateParams({ start: 'foo', step: 1, stop: 5 })).toThrow('"start" must be an integer.')
+    expect(() => validateParams({ start: -1, step: 1, stop: 5 })).toThrow('"start" must be greater than zero.')
+    expect(() => validateParams({ start: 0, step: 'foo', stop: 5 })).toThrow('"step" must be an integer.')
+    expect(() => validateParams({ start: 0, step: -1, stop: 5 })).toThrow('"step" must be greater than zero.')
+    expect(() => validateParams({ start: 0, step: 1, stop: 'foo' })).toThrow('"stop" must be an integer.')
+    expect(() => validateParams({ start: 0, step: 1, stop: -1 })).toThrow('"stop" must be greater than zero.')
+    expect(() => validateParams({ start: 0, step: 1, stop: 0 })).toThrow('"stop" must be greater than zero.')
+    expect(() => validateParams({ start: 5, step: 1, stop: 2 })).toThrow('"start" must be lower than "stop".')
+    expect(() => validateParams({ start: 2, step: 3, stop: 4 })).toThrow('"step" must be lower than "(stop - start)".')
+    expect(() => validateParams({ start: 0, step: 1, stop: 5 })).toNotThrow()
   })
 })

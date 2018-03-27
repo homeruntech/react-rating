@@ -34,7 +34,6 @@ const View = ({
   <Item
     onClick={onClick}
     onMouseMove={onMouseMove}
-    onTouchEnd={onClick}
     onTouchMove={onMouseMove}
     readonly={readonly}
   >

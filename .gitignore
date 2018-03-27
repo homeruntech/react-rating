@@ -3,9 +3,6 @@
 # dependencies
 /node_modules
 
-# build
-/build
-
 # eslint
 .eslintcache
 

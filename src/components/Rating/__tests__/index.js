@@ -1,3 +1,4 @@
+import expect from 'expect'
 import React from 'react'
 import { mount } from 'enzyme'
 import Rate from '../../Rate'

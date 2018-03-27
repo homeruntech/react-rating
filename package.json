@@ -1,13 +1,12 @@
 {
   "name": "@prontopro/react-rating",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "React-based rating component empowered by styled-components",
   "main": "dist/react-rating.min.js",
   "files": [
     "README.md",
     "LICENSE.md",
-    "dist/",
-    "src/"
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -47,35 +46,6 @@
     "url": "https://github.com/ProntoPro/react-rating/issues"
   },
   "homepage": "https://github.com/ProntoPro/react-rating",
-  "bundlesize": [
-    {
-      "path": "./dist/react-rating.js",
-      "maxSize": "10 kB"
-    },
-    {
-      "path": "./dist/react-rating.min.js",
-      "maxSize": "5 kB"
-    }
-  ],
-  "jest": {
-    "coverageReporters": [
-      "text-summary",
-      "html"
-    ],
-    "collectCoverageFrom": [
-      "src/components/**/*.js",
-      "src/utils/**/*.js"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    },
-    "setupTestFrameworkScriptFile": "<rootDir>/.config/jest.js"
-  },
   "peerDependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -83,55 +53,33 @@
     "styled-components": "^3.1.6"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.25.0",
-    "babel-eslint": "^8.0.1",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-inline-import-data-uri": "^1.0.1",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.12",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "bundlesize": "^0.15.3",
+    "nwb": "^0.21.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "enzyme": "^3.2.0",
+    "enzyme": "3.3.0",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-prettier": "^2.6.0",
-    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-import": "2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0",
+    "eslint-plugin-react": "7.7.0",
     "eslint-watch": "^3.1.3",
-    "eslint": "^4.8.0",
-    "html-webpack-plugin": "^2.30.1",
+    "eslint": "4.19.1",
     "husky": "^0.14.0",
-    "jest-enzyme": "^4.0.1",
-    "jest": "^22.0.3",
-    "open-browser-webpack-plugin": "^0.0.5",
-    "prop-types": "^15.0.0",
+    "prop-types": "15.6.1",
     "react-dom": "^16.2.0",
     "react-tap-event-plugin": "^3.0.2",
     "react": "^16.2.0",
-    "styled-components": "^3.1.6",
-    "uglify-js": "^3.1.1",
-    "webpack-dev-server": "^2.8.2",
-    "webpack": "^3.6.0"
+    "styled-components": "^3.1.6"
   },
   "scripts": {
-    "build": "webpack --config .config/webpack.dist.config.js",
-    "bundle:check": "bundlesize",
-    "dist": "yarn build && yarn docs",
-    "docs": "webpack --config .config/webpack.config.js",
+    "build": "nwb build-react-component",
     "eslint": "esw --clear --cache",
     "eslint:watch": "yarn eslint -w",
-    "precommit": "yarn dist && git diff --exit-code dist docs",
     "preversion": "echo \"Error: you shall not pass!\" && exit 1",
-    "start": "webpack-dev-server --watch --config .config/webpack.config.js --host 127.0.0.1 --content-base docs/",
+    "start": "nwb serve-react-demo",
     "test:ci": "yarn test --colors --lastCommit --silent",
-    "test:watch": "yarn test --watch",
-    "test": "jest test --coverage --env=jsdom"
+    "test:watch": "yarn test --server",
+    "test": "nwb test-react --coverage"
   },
   "directories": {
-    "doc": "docs"
+    "doc": "demo/dist"
   }
 }
