@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v0.1.7 - 2018-05-04
+### Fix
+- [Button should have type button](https://github.com/ProntoPro/react-rating/issues/50)
+
 ## v0.1.6 - 2018-05-04
 ### Fix
 - [Replace anchors usage with buttons](https://github.com/ProntoPro/react-rating/issues/46)

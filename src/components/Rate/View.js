@@ -3,30 +3,32 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Item = styled.button`
-  -moz-osx-font-smoothing: inherit;
-  -webkit-font-smoothing: inherit;
-  appearance: none;
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  display: block;
-  line-height: normal;
-  margin: 0;
-  outline: none;
-  padding: 0;
-  position: relative;
-  vertical-align: middle;
-  white-space: normal;
-
-  ${({ readonly }) => (readonly ? 'pointer-events: none;' : 'cursor: pointer;')}
-
-  &:active,
-  &:hover,
-  &:focus {
+  && {
+    -moz-osx-font-smoothing: inherit;
+    -webkit-font-smoothing: inherit;
+    appearance: none;
     background-color: transparent;
+    border: none;
     box-shadow: none;
-    cursor: pointer;
+    display: block;
+    line-height: normal;
+    margin: 0;
     outline: none;
+    padding: 0;
+    position: relative;
+    vertical-align: middle;
+    white-space: normal;
+
+    ${({ readonly }) => (readonly ? 'pointer-events: none;' : 'cursor: pointer;')}
+
+    &:active,
+    &:hover,
+    &:focus {
+      background-color: transparent;
+      box-shadow: none;
+      cursor: pointer;
+      outline: none;
+    }
   }
 `
 
@@ -57,6 +59,7 @@ const View = ({
     onMouseMove={onMouseMove}
     onTouchMove={onMouseMove}
     readonly={readonly}
+    type="button"
   >
     {emptyRate}
     <Icon

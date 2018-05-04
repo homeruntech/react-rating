@@ -1,6 +1,6 @@
 {
   "name": "@prontopro/react-rating",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "React-based rating component empowered by styled-components",
   "main": "dist/react-rating.min.js",
   "files": [
