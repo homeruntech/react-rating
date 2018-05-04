@@ -23405,7 +23405,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n  -moz-osx-font-smoothing: inherit;\n  -webkit-font-smoothing: inherit;\n  appearance: none;\n  background-color: transparent;\n  border: none;\n  box-shadow: none;\n  display: block;\n  line-height: normal;\n  margin: 0;\n  outline: none;\n  padding: 0;\n  position: relative;\n  vertical-align: middle;\n  white-space: normal;\n\n  ', '\n\n  &:active,\n  &:hover,\n  &:focus {\n    background-color: transparent;\n    box-shadow: none;\n    cursor: pointer;\n    outline: none;\n  }\n'], ['\n  -moz-osx-font-smoothing: inherit;\n  -webkit-font-smoothing: inherit;\n  appearance: none;\n  background-color: transparent;\n  border: none;\n  box-shadow: none;\n  display: block;\n  line-height: normal;\n  margin: 0;\n  outline: none;\n  padding: 0;\n  position: relative;\n  vertical-align: middle;\n  white-space: normal;\n\n  ', '\n\n  &:active,\n  &:hover,\n  &:focus {\n    background-color: transparent;\n    box-shadow: none;\n    cursor: pointer;\n    outline: none;\n  }\n']),
+var _templateObject = _taggedTemplateLiteral(['\n  && {\n    -moz-osx-font-smoothing: inherit;\n    -webkit-font-smoothing: inherit;\n    appearance: none;\n    background-color: transparent;\n    border: none;\n    box-shadow: none;\n    display: block;\n    line-height: normal;\n    margin: 0;\n    outline: none;\n    padding: 0;\n    position: relative;\n    vertical-align: middle;\n    white-space: normal;\n\n    ', '\n\n    &:active,\n    &:hover,\n    &:focus {\n      background-color: transparent;\n      box-shadow: none;\n      cursor: pointer;\n      outline: none;\n    }\n  }\n'], ['\n  && {\n    -moz-osx-font-smoothing: inherit;\n    -webkit-font-smoothing: inherit;\n    appearance: none;\n    background-color: transparent;\n    border: none;\n    box-shadow: none;\n    display: block;\n    line-height: normal;\n    margin: 0;\n    outline: none;\n    padding: 0;\n    position: relative;\n    vertical-align: middle;\n    white-space: normal;\n\n    ', '\n\n    &:active,\n    &:hover,\n    &:focus {\n      background-color: transparent;\n      box-shadow: none;\n      cursor: pointer;\n      outline: none;\n    }\n  }\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  height: 100%;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  ', '\n  width: ', ';\n  will-change: width;\n'], ['\n  height: 100%;\n  left: 0;\n  overflow: hidden;\n  position: absolute;\n  top: 0;\n  ', '\n  width: ', ';\n  will-change: width;\n']);
 
 var _react = __webpack_require__(2);
@@ -23453,7 +23453,8 @@ var View = function View(_ref4) {
       onClick: onClick,
       onMouseMove: onMouseMove,
       onTouchMove: onMouseMove,
-      readonly: readonly
+      readonly: readonly,
+      type: 'button'
     },
     emptyRate,
     _react2.default.createElement(
