@@ -42,7 +42,7 @@ class Rating extends PureComponent {
   }
 
   getPercentage = (index, ratingType) => {
-    const currentRatingValue = this.state[ratingType]
+    const currentRatingValue = this.state[ratingType] // eslint-disable-line react/destructuring-assignment
     const currentRoundedRatingValue = Math.floor(currentRatingValue)
 
     if (index === currentRoundedRatingValue) {
@@ -99,9 +99,11 @@ class Rating extends PureComponent {
     return start + (Math.floor(index) * step) + (step * this.round(index % 1))
   }
 
-  propsAreChanged = ({ initialRate, start, stop }) => initialRate !== this.props.initialRate
-    || start !== this.props.start
-    || stop !== this.props.stop
+  propsAreChanged = ({ initialRate, start, stop }) => {
+    const { initialRate: currentInitialRate, start: currentStart, stop: currentStop } = this.props
+
+    return initialRate !== currentInitialRate || start !== currentStart || stop !== currentStop
+  }
 
   round = (index) => {
     const { fractions, stop } = this.props

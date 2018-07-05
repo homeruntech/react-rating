@@ -1,7 +1,12 @@
 import { options } from '../constants'
 
-export const getClientX = event =>
-  (event.touches && event.touches[0] ? event.touches[0].clientX : event.clientX)
+export const getClientX = (event) => {
+  if (event.touches && event.touches[0]) {
+    return event.touches[0].clientX
+  }
+
+  return event.clientX
+}
 
 export const getFractionValue = (index, fractions) => {
   const fraction = Math.ceil((index % 1) * fractions) / fractions
