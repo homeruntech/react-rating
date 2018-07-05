@@ -24,6 +24,7 @@ module.exports = {
     path: path.join(DOCS_DIR),
     publicPath: './',
   },
+  mode: 'development',
   module: {
     rules: [{
       test: /\.jsx?$/,

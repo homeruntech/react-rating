@@ -52,6 +52,7 @@ module.exports = {
     libraryTarget: 'umd',
     library: 'ReactRating',
   },
+  mode: 'production',
   module: {
     rules: [{
       test: /\.js?$/,
@@ -61,18 +62,13 @@ module.exports = {
       },
     }],
   },
+  optimization: {
+    minimize: true,
+  },
   target: 'node',
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
-      include: /\.min\.js$/,
-      minimize: true,
-      sourceMap: true,
     }),
   ],
 }

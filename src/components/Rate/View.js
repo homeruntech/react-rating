@@ -39,8 +39,10 @@ const Icon = styled.div`
   position: absolute;
   top: 0;
   ${({ disableAnimation }) => (!disableAnimation ? 'transition: width .1s ease-out;' : '')}
-  width: ${({ fixedPercentage, hoverPercentage }) =>
-    `${(hoverPercentage > fixedPercentage ? hoverPercentage : fixedPercentage)}%`};
+  width: ${({
+    fixedPercentage,
+    hoverPercentage,
+  }) => `${(hoverPercentage > fixedPercentage ? hoverPercentage : fixedPercentage)}%`};
   will-change: width;
 `
 

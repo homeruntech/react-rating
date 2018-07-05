@@ -3,15 +3,19 @@ import PropTypes from 'prop-types'
 import View from './View'
 
 class Rate extends PureComponent {
-  handleMouseMove = (event) => {
+  handleMouseMove = async (event) => {
     const { animateOnHover, index, onMouseMove } = this.props
 
     if (animateOnHover) {
-      onMouseMove(event, index)
+      await onMouseMove(event, index)
     }
   }
 
-  handleClick = event => this.props.onClick(event, this.props.index)
+  handleClick = async (event) => {
+    const { index, onClick } = this.props
+
+    await onClick(event, index)
+  }
 
   render() {
     const { disableAnimation, emptyRate, fixedPercentage, fullRate, hoverPercentage, readonly } = this.props

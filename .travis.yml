@@ -2,7 +2,7 @@
 dist: trusty
 language: node_js
 node_js:
-  - 9
+  - 10
 cache:
   yarn: true
   directories:
@@ -28,7 +28,7 @@ jobs:
       script: yarn bundle:check
 
     - stage: NPM Release
-      node_js: 9
+      node_js: 10
       script: echo "Deploying to npm..."
       deploy:
         api_key: $NPM_API_KEY
@@ -40,7 +40,7 @@ jobs:
           tags: true
 
     - stage: Github Pages
-      node_js: 9
+      node_js: 10
       script: echo "Deploying Github Pages..."
       deploy:
         github_token: $GITHUB_TOKEN
